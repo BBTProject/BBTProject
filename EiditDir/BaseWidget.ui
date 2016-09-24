@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BaseWidget</class>
+ <widget class="QWidget" name="BaseWidget">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>600</width>
+    <height>400</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#BaseWidget{background-color: rgb(85, 170, 255);
+border-radius:10px;}</string>
+  </property>
+  <widget class="QPushButton" name="FileWidgetButton">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>120</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#FileWidgetButton{background-color:#2C3E50;border:none;color:#ffffff;font-size:20px;border-top-left-radius:10px;}
+#FileWidgetButton:hover{background-color:#333333;}</string>
+   </property>
+   <property name="text">
+    <string>File</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SQLWidgetButton">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>100</y>
+     <width>120</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#SQLWidgetButton{background-color:#2C3E50;border:none;color:#ffffff;font-size:20px;}
+#SQLWidgetButton:hover{background-color:#333333;}</string>
+   </property>
+   <property name="text">
+    <string>SQL</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="HelpWidgetButton">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>200</y>
+     <width>120</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#HelpWidgetButton{background-color:#2C3E50;border:none;color:#ffffff;font-size:20px;}
+#HelpWidgetButton:hover{background-color:#333333;}</string>
+   </property>
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="AboutWidgetButton">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>300</y>
+     <width>120</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#AboutWidgetButton{background-color:#2C3E50;border:none;color:#ffffff;font-size:20px;border-bottom-left-radius:10px;}
+#AboutWidgetButton:hover{background-color:#333333;}</string>
+   </property>
+   <property name="text">
+    <string>About</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="CloseButton">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>0</y>
+     <width>40</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>close</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#CloseButton{background-color: rgb(85, 170, 255);border-radius:10px;color:#ffffff;font-size:10px;
+background-image: url(:/images/images/CloseButton.png);}
+#CloseButton:hover{background-color:#333333;}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="MinButton">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>0</y>
+     <width>40</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>minimize</string>
+   </property>
+   <property name="statusTip">
+    <string/>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#MinButton{background-color: rgb(85, 170, 255);color:#ffffff;font-size:10px;border:none;
+background-image: url(:/images/images/MinButton.png);
+border-radius:10px;}
+#MinButton:hover{background-color:#333333;}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QWidget" name="FileWidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>25</y>
+     <width>480</width>
+     <height>350</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="FiletypesLabel">
+    <property name="geometry">
+     <rect>
+      <x>35</x>
+      <y>60</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);  
+font-size: 15px;
+text-align: center;</string>
+    </property>
+    <property name="text">
+     <string>Filetypes</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="FiletypesLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>55</y>
+      <width>281</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="UserInfosLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>95</y>
+      <width>281</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="UserInfomationsLabel">
+    <property name="geometry">
+     <rect>
+      <x>35</x>
+      <y>100</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+text-align: center;</string>
+    </property>
+    <property name="text">
+     <string>UserInfomations</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="StartUrlLabel">
+    <property name="geometry">
+     <rect>
+      <x>35</x>
+      <y>140</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+text-align: center;</string>
+    </property>
+    <property name="text">
+     <string>StartUrl</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="FilterKeyWordsLabel">
+    <property name="geometry">
+     <rect>
+      <x>35</x>
+      <y>180</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+text-align: center;</string>
+    </property>
+    <property name="text">
+     <string>FilterKeyWords</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="FilterKeyWordLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>175</y>
+      <width>281</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="StartUrlLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>135</y>
+      <width>281</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="RunButton">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>260</y>
+      <width>120</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+    color: rgb(255, 255, 255);
+    background-color:rgb(70, 150, 255);
+    border-radius:10px;
+    padding:2px 4px;
+    font-family: Verdana;
+    font-size: 15px;
+    text-align: center;
+}
+QPushButton:hover, QPushButton:pressed , QPushButton:checked
+{
+    background-color:#2C3E50;
+    text-align: right;
+    padding-right: 30px;
+    font-weight:100
+}
+QPushButton:hover
+{
+    background-image: url(:/images/images/RunButtonHover.png);
+    background-repeat:no-repeat;
+    background-position: center left;
+}
+QPushButton:pressed, QPushButton:checked
+{
+    background-image: url(:/images/images/RunButtonPress.png);
+    background-repeat:no-repeat;
+    background-position: center left;
+}</string>
+    </property>
+    <property name="text">
+     <string>Run</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="StopButton">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>260</y>
+      <width>120</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+    color: rgb(255, 255, 255);
+    background-color: rgb(70, 150, 255);
+    border:none;
+    border-radius:10px;
+    padding:2px 4px;
+    font-family: Verdana;
+    font-size: 15px;
+    text-align: center;
+}
+QPushButton:hover, QPushButton:pressed , QPushButton:checked
+{
+    background-color:#2C3E50;
+    text-align: right;
+    padding-right: 30px;
+    font-weight:100
+}
+QPushButton:hover
+{
+    background-image: url(:/images/images/StopButtonHover.png);
+    background-repeat:no-repeat;
+    background-position: center left;
+}
+QPushButton:pressed, QPushButton:checked
+{
+    background-image: url(:/images/images/StopButtonPress.png);
+    background-repeat:no-repeat;
+    background-position: center left;
+}</string>
+    </property>
+    <property name="text">
+     <string>Stop</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="OutputButton">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>373</y>
+     <width>50</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius:10px;
+	color: rgb(255, 255, 255);
+	border:none;
+	background-color:rgb(70, 150, 255);}
+QPushButton:hover{
+background-color: #2C3E50;}</string>
+   </property>
+   <property name="text">
+    <string>Output</string>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>CloseButton</sender>
+   <signal>clicked()</signal>
+   <receiver>BaseWidget</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>579</x>
+     <y>11</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>583</x>
+     <y>-9</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MinButton</sender>
+   <signal>clicked()</signal>
+   <receiver>BaseWidget</receiver>
+   <slot>showMinimized()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>539</x>
+     <y>53</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
