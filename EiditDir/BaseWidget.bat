@@ -1,0 +1,1 @@
+pyuic4 -o BaseWidget.py BaseWidget.ui

@@ -1,7 +1,8 @@
-from Ui_Widgets.BaseWidget import Ui_BaseWidget
+from Ui_Widgets.LoginInfoWidget import Ui_LoginInfoWidget
 from PyQt4 import QtCore,QtGui
 from PyQt4.QtCore import Qt
 import sys
+
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -13,19 +14,15 @@ class MainWindow(QtGui.QMainWindow):
 		QtGui.QWidget.__init__(self,parent=None)
 
 
-		self.ui=Ui_BaseWidget()
+		self.ui=Ui_LoginInfoWidget()
 		self.ui.setupUi(self)
 		self.ui.retranslateUi(self)
 
 		self.m_DragPosition=self.pos()
 		self.setWindowFlags(Qt.FramelessWindowHint)
 		self.setMouseTracking(True)
-
-		self.oldScrollBarValue = 0
-		self.connect(self.ui.verticalScrollBar, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.scrollFileWidget)
 		
 
-		self.ui.SQLInputWidget.hide()
 		self.show()
 
 
@@ -44,17 +41,11 @@ class MainWindow(QtGui.QMainWindow):
 		self.m_drag=False
 
 
-	def scrollFileWidget(self, position):
-		y = self.oldScrollBarValue - position
-		self.ui.ScrollWidget.scroll(0, y)
-		self.oldScrollBarValue = position
-
-
 
 def main():
-    app = QtGui.QApplication(sys.argv)   
-    mainwindow = MainWindow()
-    sys.exit(app.exec_()) 
+	app = QtGui.QApplication(sys.argv)
+	mainwindow = MainWindow()
+	sys.exit(app.exec_()) 
 
 
 if __name__ == '__main__':

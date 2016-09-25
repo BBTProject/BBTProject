@@ -1,0 +1,1 @@
+pyuic4 -o LoginInfoWidget.py LoginInfoWidget.ui

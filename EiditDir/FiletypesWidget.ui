@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FiletypesWidget</class>
+ <widget class="QWidget" name="FiletypesWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>280</width>
+    <height>325</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>280</width>
+    <height>325</height>
+   </size>
+  </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#FiletypesWidget{background-color: rgb(85, 170, 255);
+border-style: inset;
+border-width:1px;border-color:#2C3E50;}</string>
+  </property>
+  <widget class="QPushButton" name="CloseButton">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>0</y>
+     <width>25</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="toolTip">
+    <string>close</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#CloseButton{border-radius:10px;color:#ffffff;font-size:10px;background-repeat:no-repeat;
+background-image: url(:/images/images/CloseButton.png);}
+#CloseButton:hover{
+background-image: url(:/images/images/CloseButtonPress.png);}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="MinButton">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>0</y>
+     <width>25</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="toolTip">
+    <string>minimize</string>
+   </property>
+   <property name="statusTip">
+    <string/>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#MinButton{color:#ffffff;font-size:10px;border:none;
+background-image: url(:/images/images/MinButton.png);background-repeat:no-repeat;
+border-radius:10px;}
+#MinButton:hover{background-image:url(:/images/images/MinButtonPress);}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="TitleLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>151</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);  
+font-size: 15px;
+text-align: center;</string>
+   </property>
+   <property name="text">
+    <string>Choose file types:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="DocumentsLabel">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>60</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);  
+font-size: 15px;
+text-align: center;</string>
+   </property>
+   <property name="text">
+    <string>Documents:</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="DocCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>90</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);  
+font-size: 15px;
+text-align: center;</string>
+   </property>
+   <property name="text">
+    <string>.doc/x</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="XlsCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>90</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);  
+font-size: 15px;
+text-align: center;</string>
+   </property>
+   <property name="text">
+    <string>.xls</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="PPTCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>120</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);  
+font-size: 15px;
+text-align: center;</string>
+   </property>
+   <property name="text">
+    <string>.ppt/x</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="PdfCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>120</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);  
+font-size: 15px;
+text-align: center;</string>
+   </property>
+   <property name="text">
+    <string>.pdf</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="GraphicsLabel">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>150</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);  
+font-size: 15px;
+text-align: center;</string>
+   </property>
+   <property name="text">
+    <string>Graphics:</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="JpgCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>180</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);  
+font-size: 15px;
+text-align: center;</string>
+   </property>
+   <property name="text">
+    <string>.jpg/jpeg</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="PngCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>180</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);  
+font-size: 15px;
+text-align: center;</string>
+   </property>
+   <property name="text">
+    <string>.png</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="OtherLabel">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>220</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);  
+font-size: 15px;
+text-align: center;</string>
+   </property>
+   <property name="text">
+    <string>Other:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="OtherLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>250</y>
+     <width>221</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-size:13px;border-radius: 10px;</string>
+   </property>
+  </widget>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>290</y>
+     <width>120</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>MinButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FiletypesWidget</receiver>
+   <slot>showMinimized()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>227</x>
+     <y>15</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>191</x>
+     <y>30</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>CloseButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FiletypesWidget</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>260</x>
+     <y>17</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>256</x>
+     <y>41</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

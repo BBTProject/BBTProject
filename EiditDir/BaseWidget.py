@@ -27,7 +27,7 @@ class Ui_BaseWidget(object):
         BaseWidget.setObjectName(_fromUtf8("BaseWidget"))
         BaseWidget.setEnabled(True)
         BaseWidget.resize(601, 401)
-        BaseWidget.setMaximumSize(QtCore.QSize(602, 402))
+        BaseWidget.setMaximumSize(QtCore.QSize(601, 401))
         BaseWidget.setToolTip(_fromUtf8(""))
         BaseWidget.setStyleSheet(_fromUtf8("#BaseWidget{background-color: rgb(85, 170, 255);\n"
 "border-style: inset;\n"
