@@ -11,6 +11,8 @@ except AttributeError:
 class MainWindow(QtGui.QMainWindow):
 	def __init__(self):
 		QtGui.QWidget.__init__(self,parent=None)
+
+
 		self.ui=Ui_BaseWidget()
 		self.ui.setupUi(self)
 		self.ui.retranslateUi(self)
@@ -18,7 +20,12 @@ class MainWindow(QtGui.QMainWindow):
 		self.m_DragPosition=self.pos()
 		self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
 		self.setMouseTracking(True)
+
+		self.oldScrollBarValue = 0
 		self.connect(self.ui.verticalScrollBar, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.scrollFileWidget)
+		self.ui.SQLInputWidget.hide()
+
+		
 		self.show()
 
 
@@ -38,5 +45,19 @@ class MainWindow(QtGui.QMainWindow):
 
 
 	def scrollFileWidget(self, position):
-		print(position)
+		y = self.oldScrollBarValue - position
+		self.ui.ScrollWidget.scroll(0, y)
+		self.oldScrollBarValue = position
+
+	# def paintEvent(self, e):
+
+	# 	bmp = QtGui.QBitmap(self.size())
+	# 	bmp.fill()
+	# 	p = QtGui.QPainter()
+	# 	p.begin(self)
+	# 	p.setPen(Qt.NoPen)
+	# 	p.setBrush(Qt.black)
+	# 	p.drawRoundedRect(bmp.rect(), 10, 10);
+	# 	p.end()
+	# 	self.setMask(bmp)
 		

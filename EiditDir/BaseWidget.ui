@@ -42,7 +42,7 @@ border-radius:10px;}</string>
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">#FileWidgetButton{background-color:#2C3E50;border:none;color:#ffffff;font-size:20px;border-top-left-radius:10px;}
+    <string notr="true">#FileWidgetButton{background-color:#2C3E50;border:none;color:#ffffff;font-size:20px;}
 #FileWidgetButton:hover{background-color:#333333;}</string>
    </property>
    <property name="text">
@@ -102,7 +102,7 @@ border-radius:10px;}</string>
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">#AboutWidgetButton{background-color:#2C3E50;border:none;color:#ffffff;font-size:20px;border-bottom-left-radius:10px;}
+    <string notr="true">#AboutWidgetButton{background-color:#2C3E50;border:none;color:#ffffff;font-size:20px;}
 #AboutWidgetButton:hover{background-color:#333333;}</string>
    </property>
    <property name="text">
@@ -112,9 +112,9 @@ border-radius:10px;}</string>
   <widget class="QPushButton" name="CloseButton">
    <property name="geometry">
     <rect>
-     <x>560</x>
+     <x>575</x>
      <y>0</y>
-     <width>40</width>
+     <width>25</width>
      <height>25</height>
     </rect>
    </property>
@@ -122,9 +122,10 @@ border-radius:10px;}</string>
     <string>close</string>
    </property>
    <property name="styleSheet">
-    <string notr="true">#CloseButton{background-color: rgb(85, 170, 255);border-radius:10px;color:#ffffff;font-size:10px;
+    <string notr="true">#CloseButton{background-color: rgb(85, 170, 255);border-radius:10px;color:#ffffff;font-size:10px;background-repeat:no-repeat;
 background-image: url(:/images/images/CloseButton.png);}
-#CloseButton:hover{background-color:#333333;}</string>
+#CloseButton:hover{
+background-image: url(:/images/images/CloseButtonPress.png);}</string>
    </property>
    <property name="text">
     <string/>
@@ -133,9 +134,9 @@ background-image: url(:/images/images/CloseButton.png);}
   <widget class="QPushButton" name="MinButton">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>550</x>
      <y>0</y>
-     <width>40</width>
+     <width>25</width>
      <height>25</height>
     </rect>
    </property>
@@ -147,9 +148,9 @@ background-image: url(:/images/images/CloseButton.png);}
    </property>
    <property name="styleSheet">
     <string notr="true">#MinButton{background-color: rgb(85, 170, 255);color:#ffffff;font-size:10px;border:none;
-background-image: url(:/images/images/MinButton.png);
+background-image: url(:/images/images/MinButton.png);background-repeat:no-repeat;
 border-radius:10px;}
-#MinButton:hover{background-color:#333333;}</string>
+#MinButton:hover{background-image:url(:/images/images/MinButtonPress);}</string>
    </property>
    <property name="text">
     <string/>
@@ -164,20 +165,98 @@ border-radius:10px;}
      <height>375</height>
     </rect>
    </property>
-   <widget class="QPushButton" name="RunButton">
+   <widget class="QScrollBar" name="verticalScrollBar">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>260</y>
-      <width>120</width>
-      <height>50</height>
+      <x>465</x>
+      <y>10</y>
+      <width>15</width>
+      <height>365</height>
      </rect>
     </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton{
+     <string notr="true">QScrollBar:vertical{ 
+width:12px; 
+border:1px solid rgba(0,0,0,50); 
+margin:0px,0px,0px,0px; 
+padding-top:15px; 
+padding-bottom:15px; 
+} 
+QScrollBar::handle:vertical{ 
+width:16px; 
+background:rgba(0,0,0,25%); 
+min-height:20; 
+} 
+QScrollBar::handle:vertical:hover{ 
+background:rgba(0,0,0,50%); 
+border:0px rgba(0,0,0,25%); 
+} 
+QScrollBar::sub-line:vertical{ 
+height:15px; 
+border-image:url(:/images/images/scroll_up.png); 
+subcontrol-position:top; 
+} 
+QScrollBar::sub-line:vertical:hover{ 
+height:15px; 
+background:rgba(0,0,0,25%); 
+subcontrol-position:top; 
+} 
+QScrollBar::add-line:vertical{ 
+height:15px; 
+border-image:url(:/images/images/scroll_down.png); 
+subcontrol-position:bottom; 
+} 
+QScrollBar::add-line:vertical:hover{ 
+height:15px; 
+background:rgba(0,0,0,25%); 
+subcontrol-position:bottom; 
+} 
+QScrollBar::add-page:vertical{ 
+background:rgb(255,255,255); 
+} 
+QScrollBar::sub-page:vertical{ 
+background:rgb(255,255,255); 
+} 
+QScrollBar::up-arrow:vertical{ 
+border-width:0px; 
+max-height:16px; 
+min-width:17px; 
+} 
+QScrollBar::down-arrow:vertical{ 
+border-style:outset; 
+border-width:0px; 
+} </string>
+    </property>
+    <property name="maximum">
+     <number>325</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QWidget" name="ScrollWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>465</width>
+      <height>375</height>
+     </rect>
+    </property>
+    <widget class="QPushButton" name="RunButton">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>260</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
     color: rgb(255, 255, 255);
     background-color:rgb(70, 150, 255);
     border-radius:10px;
@@ -205,22 +284,22 @@ QPushButton:pressed, QPushButton:checked
     background-repeat:no-repeat;
     background-position: center left;
 }</string>
-    </property>
-    <property name="text">
-     <string>Run</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="StopButton">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>260</y>
-      <width>120</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{
+     </property>
+     <property name="text">
+      <string>Run</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="StopButton">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>260</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
     color: rgb(255, 255, 255);
     background-color: rgb(70, 150, 255);
     border:none;
@@ -249,44 +328,17 @@ QPushButton:pressed, QPushButton:checked
     background-repeat:no-repeat;
     background-position: center left;
 }</string>
-    </property>
-    <property name="text">
-     <string>Stop</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="OutputLabel">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>320</y>
-      <width>51</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-font-size: 15px;
-text-align: center;</string>
-    </property>
-    <property name="text">
-     <string>Output</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="FileInputWidget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>460</width>
-      <height>240</height>
-     </rect>
-    </property>
-    <widget class="QLabel" name="StartUrlLabel">
+     </property>
+     <property name="text">
+      <string>Stop</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="OutputLabel">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>148</y>
-       <width>81</width>
+       <y>320</y>
+       <width>51</width>
        <height>20</height>
       </rect>
      </property>
@@ -296,214 +348,218 @@ font-size: 15px;
 text-align: center;</string>
      </property>
      <property name="text">
-      <string>StartUrl</string>
+      <string>Output</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="FilterKeyWordLineEdit">
+    <widget class="QWidget" name="SQLInputWidget" native="true">
      <property name="geometry">
       <rect>
-       <x>165</x>
-       <y>183</y>
-       <width>251</width>
-       <height>25</height>
+       <x>0</x>
+       <y>0</y>
+       <width>460</width>
+       <height>240</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">font-size:13px;border-radius: 10px;</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="FiletypesLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>165</x>
-       <y>63</y>
-       <width>251</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size:13px;border-radius: 10px;</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="UserInfomationsLabel">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>108</y>
-       <width>121</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);
+     <widget class="QLineEdit" name="StartUrlLineEdit_2">
+      <property name="geometry">
+       <rect>
+        <x>115</x>
+        <y>115</y>
+        <width>301</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size:13px;border-radius: 10px;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="StartUrlLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>120</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
 font-size: 15px;
 text-align: center;</string>
-     </property>
-     <property name="text">
-      <string>UserInfomations</string>
-     </property>
+      </property>
+      <property name="text">
+       <string>StartUrl</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QLabel" name="FilterKeyWordsLabel">
+    <widget class="QWidget" name="FileInputWidget" native="true">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>188</y>
-       <width>111</width>
-       <height>20</height>
+       <x>0</x>
+       <y>0</y>
+       <width>460</width>
+       <height>240</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);
+     <widget class="QLabel" name="StartUrlLabel">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>148</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
 font-size: 15px;
 text-align: center;</string>
-     </property>
-     <property name="text">
-      <string>FilterKeyWords</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="FiletypesLabel">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>68</y>
-       <width>81</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);  
+      </property>
+      <property name="text">
+       <string>StartUrl</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="FilterKeyWordLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>165</x>
+        <y>183</y>
+        <width>251</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size:13px;border-radius: 10px;</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="FiletypesLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>165</x>
+        <y>63</y>
+        <width>251</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size:13px;border-radius: 10px;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="UserInfomationsLabel">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>108</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
 font-size: 15px;
 text-align: center;</string>
-     </property>
-     <property name="text">
-      <string>Filetypes</string>
-     </property>
+      </property>
+      <property name="text">
+       <string>UserInfomations</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="FilterKeyWordsLabel">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>188</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+text-align: center;</string>
+      </property>
+      <property name="text">
+       <string>FilterKeyWords</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="FiletypesLabel">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>68</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);  
+font-size: 15px;
+text-align: center;</string>
+      </property>
+      <property name="text">
+       <string>Filetypes</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="StartUrlLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>165</x>
+        <y>143</y>
+        <width>251</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size:13px;border-radius: 10px;</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="UserInfosLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>165</x>
+        <y>103</y>
+        <width>251</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size:13px;border-radius: 10px;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="OpenFileButton">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>100</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{border:none;background-image:url(:/images/images/OpenFileButton.png);background-repeat:no-repeat;}
+QPushButton:hover{background-image:url(:/images/images/OpenFileButtonHover.png);}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </widget>
-    <widget class="QLineEdit" name="StartUrlLineEdit">
+    <widget class="QPushButton" name="PauseButton">
      <property name="geometry">
       <rect>
-       <x>165</x>
-       <y>143</y>
-       <width>251</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size:13px;border-radius: 10px;</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="UserInfosLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>165</x>
-       <y>103</y>
-       <width>251</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size:13px;border-radius: 10px;</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="OpenFileButton">
-     <property name="geometry">
-      <rect>
-       <x>420</x>
-       <y>100</y>
-       <width>30</width>
-       <height>30</height>
+       <x>90</x>
+       <y>260</y>
+       <width>120</width>
+       <height>50</height>
       </rect>
      </property>
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton{border:none;background-image:url(:/images/images/OpenFileButton.png);background-repeat:no-repeat;}
-QPushButton:hover{background-image:url(:/images/images/OpenFileButtonHover.png);}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QScrollBar" name="verticalScrollBar">
-    <property name="geometry">
-     <rect>
-      <x>465</x>
-      <y>0</y>
-      <width>15</width>
-      <height>375</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
-    </property>
-   </widget>
-   <widget class="QTableWidget" name="OutputTableWidget">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>351</y>
-      <width>431</width>
-      <height>191</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="SQLInputWidget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>460</width>
-      <height>240</height>
-     </rect>
-    </property>
-    <widget class="QLineEdit" name="StartUrlLineEdit_2">
-     <property name="geometry">
-      <rect>
-       <x>115</x>
-       <y>115</y>
-       <width>301</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size:13px;border-radius: 10px;</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="StartUrlLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>120</y>
-       <width>81</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);
-font-size: 15px;
-text-align: center;</string>
-     </property>
-     <property name="text">
-      <string>StartUrl</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QPushButton" name="PauseButton">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>260</y>
-      <width>120</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{
+      <string notr="true">QPushButton{
     color: rgb(255, 255, 255);
     background-color:rgb(70, 150, 255);
     border-radius:10px;
@@ -531,57 +587,35 @@ QPushButton:pressed, QPushButton:checked
     background-repeat:no-repeat;
     background-position: center left;
 }</string>
-    </property>
-    <property name="text">
-     <string>Pause</string>
-    </property>
+     </property>
+     <property name="text">
+      <string>Pause</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="OutputTableWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>350</y>
+       <width>430</width>
+       <height>325</height>
+      </rect>
+     </property>
+    </widget>
+    <zorder>RunButton</zorder>
+    <zorder>StopButton</zorder>
+    <zorder>OutputLabel</zorder>
+    <zorder>PauseButton</zorder>
+    <zorder>OutputTableWidget</zorder>
+    <zorder>SQLInputWidget</zorder>
+    <zorder>FileInputWidget</zorder>
    </widget>
-   <zorder>StopButton</zorder>
-   <zorder>OutputLabel</zorder>
-   <zorder>verticalScrollBar</zorder>
-   <zorder>OutputTableWidget</zorder>
-   <zorder>SQLInputWidget</zorder>
-   <zorder>FileInputWidget</zorder>
-   <zorder>PauseButton</zorder>
-   <zorder>RunButton</zorder>
   </widget>
  </widget>
  <resources>
   <include location="res.qrc"/>
  </resources>
  <connections>
-  <connection>
-   <sender>CloseButton</sender>
-   <signal>clicked()</signal>
-   <receiver>BaseWidget</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>579</x>
-     <y>11</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>583</x>
-     <y>-9</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>MinButton</sender>
-   <signal>clicked()</signal>
-   <receiver>BaseWidget</receiver>
-   <slot>showMinimized()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>539</x>
-     <y>19</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>539</x>
-     <y>53</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>FileWidgetButton</sender>
    <signal>clicked()</signal>
@@ -595,38 +629,6 @@ QPushButton:pressed, QPushButton:checked
     <hint type="destinationlabel">
      <x>159</x>
      <y>294</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>FileWidgetButton</sender>
-   <signal>clicked()</signal>
-   <receiver>SQLInputWidget</receiver>
-   <slot>hide()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>94</x>
-     <y>62</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>151</x>
-     <y>69</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>SQLWidgetButton</sender>
-   <signal>clicked()</signal>
-   <receiver>SQLInputWidget</receiver>
-   <slot>show()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>47</x>
-     <y>140</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>138</x>
-     <y>139</y>
     </hint>
    </hints>
   </connection>
@@ -685,12 +687,12 @@ QPushButton:pressed, QPushButton:checked
    <slot>show()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>49</x>
-     <y>43</y>
+     <x>65</x>
+     <y>69</y>
     </hint>
     <hint type="destinationlabel">
-     <x>161</x>
-     <y>63</y>
+     <x>170</x>
+     <y>69</y>
     </hint>
    </hints>
   </connection>
@@ -701,12 +703,76 @@ QPushButton:pressed, QPushButton:checked
    <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>72</x>
-     <y>134</y>
+     <x>74</x>
+     <y>138</y>
     </hint>
     <hint type="destinationlabel">
-     <x>134</x>
-     <y>116</y>
+     <x>153</x>
+     <y>117</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>FileWidgetButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SQLInputWidget</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>93</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>145</x>
+     <y>49</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SQLWidgetButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SQLInputWidget</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>92</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>137</x>
+     <y>147</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MinButton</sender>
+   <signal>clicked()</signal>
+   <receiver>BaseWidget</receiver>
+   <slot>showMinimized()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>539</x>
+     <y>53</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>CloseButton</sender>
+   <signal>clicked()</signal>
+   <receiver>BaseWidget</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>579</x>
+     <y>11</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>583</x>
+     <y>-9</y>
     </hint>
    </hints>
   </connection>
