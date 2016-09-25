@@ -26,11 +26,12 @@ class Ui_BaseWidget(object):
     def setupUi(self, BaseWidget):
         BaseWidget.setObjectName(_fromUtf8("BaseWidget"))
         BaseWidget.setEnabled(True)
-        BaseWidget.resize(600, 400)
-        BaseWidget.setMaximumSize(QtCore.QSize(600, 400))
+        BaseWidget.resize(601, 401)
+        BaseWidget.setMaximumSize(QtCore.QSize(602, 402))
         BaseWidget.setToolTip(_fromUtf8(""))
         BaseWidget.setStyleSheet(_fromUtf8("#BaseWidget{background-color: rgb(85, 170, 255);\n"
-"border-radius:10px;}"))
+"border-style: inset;\n"
+"border-width:1px;border-color:#2C3E50;}"))
         self.FileWidgetButton = QtGui.QPushButton(BaseWidget)
         self.FileWidgetButton.setGeometry(QtCore.QRect(0, 0, 120, 100))
         self.FileWidgetButton.setAutoFillBackground(False)
@@ -57,7 +58,7 @@ class Ui_BaseWidget(object):
         self.AboutWidgetButton.setObjectName(_fromUtf8("AboutWidgetButton"))
         self.CloseButton = QtGui.QPushButton(BaseWidget)
         self.CloseButton.setGeometry(QtCore.QRect(575, 0, 25, 25))
-        self.CloseButton.setStyleSheet(_fromUtf8("#CloseButton{background-color: rgb(85, 170, 255);border-radius:10px;color:#ffffff;font-size:10px;background-repeat:no-repeat;\n"
+        self.CloseButton.setStyleSheet(_fromUtf8("#CloseButton{border-radius:10px;color:#ffffff;font-size:10px;background-repeat:no-repeat;\n"
 "background-image: url(:/images/images/CloseButton.png);}\n"
 "#CloseButton:hover{\n"
 "background-image: url(:/images/images/CloseButtonPress.png);}"))
@@ -66,7 +67,7 @@ class Ui_BaseWidget(object):
         self.MinButton = QtGui.QPushButton(BaseWidget)
         self.MinButton.setGeometry(QtCore.QRect(550, 0, 25, 25))
         self.MinButton.setStatusTip(_fromUtf8(""))
-        self.MinButton.setStyleSheet(_fromUtf8("#MinButton{background-color: rgb(85, 170, 255);color:#ffffff;font-size:10px;border:none;\n"
+        self.MinButton.setStyleSheet(_fromUtf8("#MinButton{color:#ffffff;font-size:10px;border:none;\n"
 "background-image: url(:/images/images/MinButton.png);background-repeat:no-repeat;\n"
 "border-radius:10px;}\n"
 "#MinButton:hover{background-image:url(:/images/images/MinButtonPress);}"))
@@ -208,11 +209,11 @@ class Ui_BaseWidget(object):
         self.SQLInputWidget.setGeometry(QtCore.QRect(0, 0, 460, 240))
         self.SQLInputWidget.setObjectName(_fromUtf8("SQLInputWidget"))
         self.StartUrlLineEdit_2 = QtGui.QLineEdit(self.SQLInputWidget)
-        self.StartUrlLineEdit_2.setGeometry(QtCore.QRect(115, 115, 301, 25))
+        self.StartUrlLineEdit_2.setGeometry(QtCore.QRect(95, 115, 321, 25))
         self.StartUrlLineEdit_2.setStyleSheet(_fromUtf8("font-size:13px;border-radius: 10px;"))
         self.StartUrlLineEdit_2.setObjectName(_fromUtf8("StartUrlLineEdit_2"))
         self.StartUrlLabel_2 = QtGui.QLabel(self.SQLInputWidget)
-        self.StartUrlLabel_2.setGeometry(QtCore.QRect(30, 120, 81, 20))
+        self.StartUrlLabel_2.setGeometry(QtCore.QRect(20, 120, 81, 20))
         self.StartUrlLabel_2.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);\n"
 "font-size: 15px;\n"
 "text-align: center;"))
@@ -267,6 +268,13 @@ class Ui_BaseWidget(object):
 "QPushButton:hover{background-image:url(:/images/images/OpenFileButtonHover.png);}"))
         self.OpenFileButton.setText(_fromUtf8(""))
         self.OpenFileButton.setObjectName(_fromUtf8("OpenFileButton"))
+        self.AddFiletypesButton = QtGui.QPushButton(self.FileInputWidget)
+        self.AddFiletypesButton.setGeometry(QtCore.QRect(420, 62, 30, 30))
+        self.AddFiletypesButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.AddFiletypesButton.setStyleSheet(_fromUtf8("QPushButton{border:none;background-image:url(:/images/images/AddFiletypesButton.png);background-repeat:no-repeat;}\n"
+"QPushButton:hover{background-image:url(:/images/images/AddFiletypesButtonHover.png);}"))
+        self.AddFiletypesButton.setText(_fromUtf8(""))
+        self.AddFiletypesButton.setObjectName(_fromUtf8("AddFiletypesButton"))
         self.PauseButton = QtGui.QPushButton(self.ScrollWidget)
         self.PauseButton.setGeometry(QtCore.QRect(90, 260, 120, 50))
         self.PauseButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -294,21 +302,73 @@ class Ui_BaseWidget(object):
 "}\n"
 "QPushButton:pressed, QPushButton:checked\n"
 "{\n"
-"    background-image: url(:/images/imagesPauseButtonPress.png);\n"
+"    background-image: url(:/images/images/PauseButtonPress.png);\n"
 "    background-repeat:no-repeat;\n"
 "    background-position: center left;\n"
 "}"))
         self.PauseButton.setObjectName(_fromUtf8("PauseButton"))
         self.OutputTableWidget = QtGui.QTableWidget(self.ScrollWidget)
         self.OutputTableWidget.setGeometry(QtCore.QRect(20, 350, 430, 325))
+        self.OutputTableWidget.setStyleSheet(_fromUtf8("QScrollBar:vertical{ \n"
+"width:12px; \n"
+"border:1px solid rgba(0,0,0,50); \n"
+"margin:0px,0px,0px,0px; \n"
+"padding-top:15px; \n"
+"padding-bottom:15px; \n"
+"} \n"
+"QScrollBar::handle:vertical{ \n"
+"width:16px; \n"
+"background:rgba(0,0,0,25%); \n"
+"min-height:20; \n"
+"} \n"
+"QScrollBar::handle:vertical:hover{ \n"
+"background:rgba(0,0,0,50%); \n"
+"border:0px rgba(0,0,0,25%); \n"
+"} \n"
+"QScrollBar::sub-line:vertical{ \n"
+"height:15px; \n"
+"border-image:url(:/images/images/scroll_up.png); \n"
+"subcontrol-position:top; \n"
+"} \n"
+"QScrollBar::sub-line:vertical:hover{ \n"
+"height:15px; \n"
+"background:rgba(0,0,0,25%); \n"
+"subcontrol-position:top; \n"
+"} \n"
+"QScrollBar::add-line:vertical{ \n"
+"height:15px; \n"
+"border-image:url(:/images/images/scroll_down.png); \n"
+"subcontrol-position:bottom; \n"
+"} \n"
+"QScrollBar::add-line:vertical:hover{ \n"
+"height:15px; \n"
+"background:rgba(0,0,0,25%); \n"
+"subcontrol-position:bottom; \n"
+"} \n"
+"QScrollBar::add-page:vertical{ \n"
+"background:rgb(255,255,255); \n"
+"} \n"
+"QScrollBar::sub-page:vertical{ \n"
+"background:rgb(255,255,255); \n"
+"} \n"
+"QScrollBar::up-arrow:vertical{ \n"
+"border-width:0px; \n"
+"max-height:16px; \n"
+"min-width:17px; \n"
+"} \n"
+"QScrollBar::down-arrow:vertical{ \n"
+"border-style:outset; \n"
+"border-width:0px; \n"
+"} "))
         self.OutputTableWidget.setObjectName(_fromUtf8("OutputTableWidget"))
         self.OutputTableWidget.setColumnCount(0)
         self.OutputTableWidget.setRowCount(0)
-        self.RunButton.raise_()
+        self.OutputTableWidget.horizontalHeader().setStretchLastSection(True)
         self.StopButton.raise_()
         self.OutputLabel.raise_()
         self.PauseButton.raise_()
         self.OutputTableWidget.raise_()
+        self.RunButton.raise_()
         self.SQLInputWidget.raise_()
         self.FileInputWidget.raise_()
 
@@ -324,6 +384,21 @@ class Ui_BaseWidget(object):
         QtCore.QObject.connect(self.MinButton, QtCore.SIGNAL(_fromUtf8("clicked()")), BaseWidget.showMinimized)
         QtCore.QObject.connect(self.CloseButton, QtCore.SIGNAL(_fromUtf8("clicked()")), BaseWidget.close)
         QtCore.QMetaObject.connectSlotsByName(BaseWidget)
+        BaseWidget.setTabOrder(self.FileWidgetButton, self.SQLWidgetButton)
+        BaseWidget.setTabOrder(self.SQLWidgetButton, self.HelpWidgetButton)
+        BaseWidget.setTabOrder(self.HelpWidgetButton, self.AboutWidgetButton)
+        BaseWidget.setTabOrder(self.AboutWidgetButton, self.FiletypesLineEdit)
+        BaseWidget.setTabOrder(self.FiletypesLineEdit, self.UserInfosLineEdit)
+        BaseWidget.setTabOrder(self.UserInfosLineEdit, self.OpenFileButton)
+        BaseWidget.setTabOrder(self.OpenFileButton, self.StartUrlLineEdit)
+        BaseWidget.setTabOrder(self.StartUrlLineEdit, self.FilterKeyWordLineEdit)
+        BaseWidget.setTabOrder(self.FilterKeyWordLineEdit, self.PauseButton)
+        BaseWidget.setTabOrder(self.PauseButton, self.RunButton)
+        BaseWidget.setTabOrder(self.RunButton, self.StopButton)
+        BaseWidget.setTabOrder(self.StopButton, self.OutputTableWidget)
+        BaseWidget.setTabOrder(self.OutputTableWidget, self.StartUrlLineEdit_2)
+        BaseWidget.setTabOrder(self.StartUrlLineEdit_2, self.MinButton)
+        BaseWidget.setTabOrder(self.MinButton, self.CloseButton)
 
     def retranslateUi(self, BaseWidget):
         BaseWidget.setWindowTitle(_translate("BaseWidget", "Form", None))
