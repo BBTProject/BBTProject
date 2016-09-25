@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/PauseButton.png</file>
+    <file>images/PauseButtonPress.png</file>
+    <file>images/OpenFileButton.png</file>
+    <file>images/OpenFileButtonHover.png</file>
     <file>images/CloseButton.png</file>
     <file>images/MinButton.png</file>
     <file>images/StopButtonHover.png</file>

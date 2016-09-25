@@ -72,48 +72,8 @@ class Ui_BaseWidget(object):
         self.MinButton.setText(_fromUtf8(""))
         self.MinButton.setObjectName(_fromUtf8("MinButton"))
         self.FileWidget = QtGui.QWidget(BaseWidget)
-        self.FileWidget.setGeometry(QtCore.QRect(120, 25, 480, 350))
+        self.FileWidget.setGeometry(QtCore.QRect(120, 25, 480, 375))
         self.FileWidget.setObjectName(_fromUtf8("FileWidget"))
-        self.FiletypesLabel = QtGui.QLabel(self.FileWidget)
-        self.FiletypesLabel.setGeometry(QtCore.QRect(35, 60, 81, 20))
-        self.FiletypesLabel.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);  \n"
-"font-size: 15px;\n"
-"text-align: center;"))
-        self.FiletypesLabel.setObjectName(_fromUtf8("FiletypesLabel"))
-        self.FiletypesLineEdit = QtGui.QLineEdit(self.FileWidget)
-        self.FiletypesLineEdit.setGeometry(QtCore.QRect(180, 55, 281, 25))
-        self.FiletypesLineEdit.setStyleSheet(_fromUtf8("border-radius: 10px;"))
-        self.FiletypesLineEdit.setObjectName(_fromUtf8("FiletypesLineEdit"))
-        self.UserInfosLineEdit = QtGui.QLineEdit(self.FileWidget)
-        self.UserInfosLineEdit.setGeometry(QtCore.QRect(180, 95, 281, 25))
-        self.UserInfosLineEdit.setStyleSheet(_fromUtf8("border-radius: 10px;"))
-        self.UserInfosLineEdit.setObjectName(_fromUtf8("UserInfosLineEdit"))
-        self.UserInfomationsLabel = QtGui.QLabel(self.FileWidget)
-        self.UserInfomationsLabel.setGeometry(QtCore.QRect(35, 100, 121, 20))
-        self.UserInfomationsLabel.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);\n"
-"font-size: 15px;\n"
-"text-align: center;"))
-        self.UserInfomationsLabel.setObjectName(_fromUtf8("UserInfomationsLabel"))
-        self.StartUrlLabel = QtGui.QLabel(self.FileWidget)
-        self.StartUrlLabel.setGeometry(QtCore.QRect(35, 140, 81, 20))
-        self.StartUrlLabel.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);\n"
-"font-size: 15px;\n"
-"text-align: center;"))
-        self.StartUrlLabel.setObjectName(_fromUtf8("StartUrlLabel"))
-        self.FilterKeyWordsLabel = QtGui.QLabel(self.FileWidget)
-        self.FilterKeyWordsLabel.setGeometry(QtCore.QRect(35, 180, 111, 20))
-        self.FilterKeyWordsLabel.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);\n"
-"font-size: 15px;\n"
-"text-align: center;"))
-        self.FilterKeyWordsLabel.setObjectName(_fromUtf8("FilterKeyWordsLabel"))
-        self.FilterKeyWordLineEdit = QtGui.QLineEdit(self.FileWidget)
-        self.FilterKeyWordLineEdit.setGeometry(QtCore.QRect(180, 175, 281, 25))
-        self.FilterKeyWordLineEdit.setStyleSheet(_fromUtf8("border-radius: 10px;"))
-        self.FilterKeyWordLineEdit.setObjectName(_fromUtf8("FilterKeyWordLineEdit"))
-        self.StartUrlLineEdit = QtGui.QLineEdit(self.FileWidget)
-        self.StartUrlLineEdit.setGeometry(QtCore.QRect(180, 135, 281, 25))
-        self.StartUrlLineEdit.setStyleSheet(_fromUtf8("border-radius: 10px;"))
-        self.StartUrlLineEdit.setObjectName(_fromUtf8("StartUrlLineEdit"))
         self.RunButton = QtGui.QPushButton(self.FileWidget)
         self.RunButton.setGeometry(QtCore.QRect(90, 260, 120, 50))
         self.RunButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -178,20 +138,136 @@ class Ui_BaseWidget(object):
 "    background-position: center left;\n"
 "}"))
         self.StopButton.setObjectName(_fromUtf8("StopButton"))
-        self.OutputButton = QtGui.QPushButton(BaseWidget)
-        self.OutputButton.setGeometry(QtCore.QRect(550, 373, 50, 25))
-        self.OutputButton.setStyleSheet(_fromUtf8("QPushButton{\n"
-"    border-radius:10px;\n"
+        self.OutputLabel = QtGui.QLabel(self.FileWidget)
+        self.OutputLabel.setGeometry(QtCore.QRect(20, 320, 51, 20))
+        self.OutputLabel.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);\n"
+"font-size: 15px;\n"
+"text-align: center;"))
+        self.OutputLabel.setObjectName(_fromUtf8("OutputLabel"))
+        self.FileInputWidget = QtGui.QWidget(self.FileWidget)
+        self.FileInputWidget.setGeometry(QtCore.QRect(0, 0, 460, 240))
+        self.FileInputWidget.setObjectName(_fromUtf8("FileInputWidget"))
+        self.StartUrlLabel = QtGui.QLabel(self.FileInputWidget)
+        self.StartUrlLabel.setGeometry(QtCore.QRect(20, 148, 81, 20))
+        self.StartUrlLabel.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);\n"
+"font-size: 15px;\n"
+"text-align: center;"))
+        self.StartUrlLabel.setObjectName(_fromUtf8("StartUrlLabel"))
+        self.FilterKeyWordLineEdit = QtGui.QLineEdit(self.FileInputWidget)
+        self.FilterKeyWordLineEdit.setGeometry(QtCore.QRect(165, 183, 251, 25))
+        self.FilterKeyWordLineEdit.setStyleSheet(_fromUtf8("font-size:13px;border-radius: 10px;"))
+        self.FilterKeyWordLineEdit.setObjectName(_fromUtf8("FilterKeyWordLineEdit"))
+        self.FiletypesLineEdit = QtGui.QLineEdit(self.FileInputWidget)
+        self.FiletypesLineEdit.setGeometry(QtCore.QRect(165, 63, 251, 25))
+        self.FiletypesLineEdit.setStyleSheet(_fromUtf8("font-size:13px;border-radius: 10px;"))
+        self.FiletypesLineEdit.setObjectName(_fromUtf8("FiletypesLineEdit"))
+        self.UserInfomationsLabel = QtGui.QLabel(self.FileInputWidget)
+        self.UserInfomationsLabel.setGeometry(QtCore.QRect(20, 108, 121, 20))
+        self.UserInfomationsLabel.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);\n"
+"font-size: 15px;\n"
+"text-align: center;"))
+        self.UserInfomationsLabel.setObjectName(_fromUtf8("UserInfomationsLabel"))
+        self.FilterKeyWordsLabel = QtGui.QLabel(self.FileInputWidget)
+        self.FilterKeyWordsLabel.setGeometry(QtCore.QRect(20, 188, 111, 20))
+        self.FilterKeyWordsLabel.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);\n"
+"font-size: 15px;\n"
+"text-align: center;"))
+        self.FilterKeyWordsLabel.setObjectName(_fromUtf8("FilterKeyWordsLabel"))
+        self.FiletypesLabel = QtGui.QLabel(self.FileInputWidget)
+        self.FiletypesLabel.setGeometry(QtCore.QRect(20, 68, 81, 20))
+        self.FiletypesLabel.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);  \n"
+"font-size: 15px;\n"
+"text-align: center;"))
+        self.FiletypesLabel.setObjectName(_fromUtf8("FiletypesLabel"))
+        self.StartUrlLineEdit = QtGui.QLineEdit(self.FileInputWidget)
+        self.StartUrlLineEdit.setGeometry(QtCore.QRect(165, 143, 251, 25))
+        self.StartUrlLineEdit.setStyleSheet(_fromUtf8("font-size:13px;border-radius: 10px;"))
+        self.StartUrlLineEdit.setObjectName(_fromUtf8("StartUrlLineEdit"))
+        self.UserInfosLineEdit = QtGui.QLineEdit(self.FileInputWidget)
+        self.UserInfosLineEdit.setGeometry(QtCore.QRect(165, 103, 251, 25))
+        self.UserInfosLineEdit.setStyleSheet(_fromUtf8("font-size:13px;border-radius: 10px;"))
+        self.UserInfosLineEdit.setObjectName(_fromUtf8("UserInfosLineEdit"))
+        self.OpenFileButton = QtGui.QPushButton(self.FileInputWidget)
+        self.OpenFileButton.setGeometry(QtCore.QRect(420, 100, 30, 30))
+        self.OpenFileButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.OpenFileButton.setStyleSheet(_fromUtf8("QPushButton{border:none;background-image:url(:/images/images/OpenFileButton.png);background-repeat:no-repeat;}\n"
+"QPushButton:hover{background-image:url(:/images/images/OpenFileButtonHover.png);}"))
+        self.OpenFileButton.setText(_fromUtf8(""))
+        self.OpenFileButton.setObjectName(_fromUtf8("OpenFileButton"))
+        self.verticalScrollBar = QtGui.QScrollBar(self.FileWidget)
+        self.verticalScrollBar.setGeometry(QtCore.QRect(465, 0, 15, 375))
+        self.verticalScrollBar.setOrientation(QtCore.Qt.Vertical)
+        self.verticalScrollBar.setObjectName(_fromUtf8("verticalScrollBar"))
+        self.OutputTableWidget = QtGui.QTableWidget(self.FileWidget)
+        self.OutputTableWidget.setGeometry(QtCore.QRect(20, 351, 431, 191))
+        self.OutputTableWidget.setObjectName(_fromUtf8("OutputTableWidget"))
+        self.OutputTableWidget.setColumnCount(0)
+        self.OutputTableWidget.setRowCount(0)
+        self.SQLInputWidget = QtGui.QWidget(self.FileWidget)
+        self.SQLInputWidget.setGeometry(QtCore.QRect(0, 0, 460, 240))
+        self.SQLInputWidget.setObjectName(_fromUtf8("SQLInputWidget"))
+        self.StartUrlLineEdit_2 = QtGui.QLineEdit(self.SQLInputWidget)
+        self.StartUrlLineEdit_2.setGeometry(QtCore.QRect(115, 115, 301, 25))
+        self.StartUrlLineEdit_2.setStyleSheet(_fromUtf8("font-size:13px;border-radius: 10px;"))
+        self.StartUrlLineEdit_2.setObjectName(_fromUtf8("StartUrlLineEdit_2"))
+        self.StartUrlLabel_2 = QtGui.QLabel(self.SQLInputWidget)
+        self.StartUrlLabel_2.setGeometry(QtCore.QRect(30, 120, 81, 20))
+        self.StartUrlLabel_2.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);\n"
+"font-size: 15px;\n"
+"text-align: center;"))
+        self.StartUrlLabel_2.setObjectName(_fromUtf8("StartUrlLabel_2"))
+        self.PauseButton = QtGui.QPushButton(self.FileWidget)
+        self.PauseButton.setGeometry(QtCore.QRect(90, 260, 120, 50))
+        self.PauseButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.PauseButton.setStyleSheet(_fromUtf8("QPushButton{\n"
 "    color: rgb(255, 255, 255);\n"
-"    border:none;\n"
-"    background-color:rgb(70, 150, 255);}\n"
-"QPushButton:hover{\n"
-"background-color: #2C3E50;}"))
-        self.OutputButton.setObjectName(_fromUtf8("OutputButton"))
+"    background-color:rgb(70, 150, 255);\n"
+"    border-radius:10px;\n"
+"    padding:2px 4px;\n"
+"    font-family: Verdana;\n"
+"    font-size: 15px;\n"
+"    text-align: center;\n"
+"}\n"
+"QPushButton:hover, QPushButton:pressed , QPushButton:checked\n"
+"{\n"
+"    background-color:#2C3E50;\n"
+"    text-align: right;\n"
+"    padding-right: 30px;\n"
+"    font-weight:100\n"
+"}\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-image: url(:/images/images/PauseButton.png);\n"
+"    background-repeat:no-repeat;\n"
+"    background-position: center left;\n"
+"}\n"
+"QPushButton:pressed, QPushButton:checked\n"
+"{\n"
+"    background-image: url(:/images/imagesPauseButtonPress.png);\n"
+"    background-repeat:no-repeat;\n"
+"    background-position: center left;\n"
+"}"))
+        self.PauseButton.setObjectName(_fromUtf8("PauseButton"))
+        self.StopButton.raise_()
+        self.OutputLabel.raise_()
+        self.verticalScrollBar.raise_()
+        self.OutputTableWidget.raise_()
+        self.SQLInputWidget.raise_()
+        self.FileInputWidget.raise_()
+        self.PauseButton.raise_()
+        self.RunButton.raise_()
 
         self.retranslateUi(BaseWidget)
         QtCore.QObject.connect(self.CloseButton, QtCore.SIGNAL(_fromUtf8("clicked()")), BaseWidget.close)
         QtCore.QObject.connect(self.MinButton, QtCore.SIGNAL(_fromUtf8("clicked()")), BaseWidget.showMinimized)
+        QtCore.QObject.connect(self.FileWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileWidget.show)
+        QtCore.QObject.connect(self.FileWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.SQLInputWidget.hide)
+        QtCore.QObject.connect(self.SQLWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.SQLInputWidget.show)
+        QtCore.QObject.connect(self.SQLWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileWidget.show)
+        QtCore.QObject.connect(self.HelpWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileWidget.hide)
+        QtCore.QObject.connect(self.AboutWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileWidget.hide)
+        QtCore.QObject.connect(self.FileWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileInputWidget.show)
+        QtCore.QObject.connect(self.SQLWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileInputWidget.hide)
         QtCore.QMetaObject.connectSlotsByName(BaseWidget)
 
     def retranslateUi(self, BaseWidget):
@@ -202,12 +278,14 @@ class Ui_BaseWidget(object):
         self.AboutWidgetButton.setText(_translate("BaseWidget", "About", None))
         self.CloseButton.setToolTip(_translate("BaseWidget", "close", None))
         self.MinButton.setToolTip(_translate("BaseWidget", "minimize", None))
-        self.FiletypesLabel.setText(_translate("BaseWidget", "Filetypes", None))
-        self.UserInfomationsLabel.setText(_translate("BaseWidget", "UserInfomations", None))
-        self.StartUrlLabel.setText(_translate("BaseWidget", "StartUrl", None))
-        self.FilterKeyWordsLabel.setText(_translate("BaseWidget", "FilterKeyWords", None))
         self.RunButton.setText(_translate("BaseWidget", "Run", None))
         self.StopButton.setText(_translate("BaseWidget", "Stop", None))
-        self.OutputButton.setText(_translate("BaseWidget", "Output", None))
+        self.OutputLabel.setText(_translate("BaseWidget", "Output", None))
+        self.StartUrlLabel.setText(_translate("BaseWidget", "StartUrl", None))
+        self.UserInfomationsLabel.setText(_translate("BaseWidget", "UserInfomations", None))
+        self.FilterKeyWordsLabel.setText(_translate("BaseWidget", "FilterKeyWords", None))
+        self.FiletypesLabel.setText(_translate("BaseWidget", "Filetypes", None))
+        self.StartUrlLabel_2.setText(_translate("BaseWidget", "StartUrl", None))
+        self.PauseButton.setText(_translate("BaseWidget", "Pause", None))
 
 import res_rc
