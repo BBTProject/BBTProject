@@ -361,7 +361,7 @@ text-align: center;</string>
        <height>240</height>
       </rect>
      </property>
-     <widget class="QLineEdit" name="StartUrlLineEdit_2">
+     <widget class="QLineEdit" name="SQLStartUrlLineEdit">
       <property name="geometry">
        <rect>
         <x>95</x>
@@ -374,7 +374,7 @@ text-align: center;</string>
        <string notr="true">font-size:13px;border-radius: 10px;</string>
       </property>
      </widget>
-     <widget class="QLabel" name="StartUrlLabel_2">
+     <widget class="QLabel" name="SQLStartUrlLabel">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -402,7 +402,7 @@ text-align: center;</string>
        <height>240</height>
       </rect>
      </property>
-     <widget class="QLabel" name="StartUrlLabel">
+     <widget class="QLabel" name="FileStartUrlLabel">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -500,7 +500,7 @@ text-align: center;</string>
        <string>Filetypes</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="StartUrlLineEdit">
+     <widget class="QLineEdit" name="FileStartUrlLineEdit">
       <property name="geometry">
        <rect>
         <x>165</x>
@@ -697,13 +697,13 @@ border-width:0px;
   <tabstop>FiletypesLineEdit</tabstop>
   <tabstop>UserInfosLineEdit</tabstop>
   <tabstop>OpenFileButton</tabstop>
-  <tabstop>StartUrlLineEdit</tabstop>
+  <tabstop>FileStartUrlLineEdit</tabstop>
   <tabstop>FilterKeyWordLineEdit</tabstop>
   <tabstop>PauseButton</tabstop>
   <tabstop>RunButton</tabstop>
   <tabstop>StopButton</tabstop>
   <tabstop>OutputTableWidget</tabstop>
-  <tabstop>StartUrlLineEdit_2</tabstop>
+  <tabstop>SQLStartUrlLineEdit</tabstop>
   <tabstop>MinButton</tabstop>
   <tabstop>CloseButton</tabstop>
  </tabstops>

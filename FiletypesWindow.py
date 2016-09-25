@@ -9,9 +9,9 @@ except AttributeError:
     def _fromUtf8(s):
         return s
 
-class MainWindow(QtGui.QMainWindow):
-	def __init__(self):
-		QtGui.QWidget.__init__(self,parent=None)
+class FiletypesWindow(QtGui.QDialog):
+	def __init__(self, filetypesList, parent=None):
+		QtGui.QWidget.__init__(self,parent)
 
 
 		self.ui=Ui_FiletypesWidget()
@@ -21,9 +21,31 @@ class MainWindow(QtGui.QMainWindow):
 		self.m_DragPosition=self.pos()
 		self.setWindowFlags(Qt.FramelessWindowHint)
 		self.setMouseTracking(True)
-		
 
-		self.show()
+		self.connect(self.ui.OkButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.acceptedClose)
+		self.connect(self.ui.CancelButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.rejectedClose)
+
+		self.filetypesList = filetypesList
+
+	def acceptedClose(self):
+		self.geneFiletypesList()
+		self.accept()
+
+	def rejectedClose(self):
+		self.reject()
+
+	def geneFiletypesList(self):
+		checkBoxs = self.findChildren(QtGui.QCheckBox)
+		for checkBox in checkBoxs:
+			if checkBox.checkState() == Qt.Checked:
+				text = checkBox.text()
+				for t in text.split("/"):
+					if t != "":
+						self.filetypesList.append(t)
+		otherText = self.ui.OtherLineEdit.text()
+		for t in otherText.split(";"):
+			if t != "":
+				self.filetypesList.append(t)
 
 
 	def mousePressEvent(self, event):
@@ -44,7 +66,8 @@ class MainWindow(QtGui.QMainWindow):
 
 def main():
 	app = QtGui.QApplication(sys.argv)
-	mainwindow = MainWindow()
+	mainwindow = FiletypesWindow()
+	mainwindow.show()
 	sys.exit(app.exec_()) 
 
 

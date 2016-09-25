@@ -121,7 +121,7 @@ text-align: center;</string>
     <rect>
      <x>50</x>
      <y>90</y>
-     <width>71</width>
+     <width>101</width>
      <height>21</height>
     </rect>
    </property>
@@ -131,13 +131,13 @@ font-size: 15px;
 text-align: center;</string>
    </property>
    <property name="text">
-    <string>.doc/x</string>
+    <string>.doc/.docx</string>
    </property>
   </widget>
   <widget class="QCheckBox" name="XlsCheckBox">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>160</x>
      <y>90</y>
      <width>71</width>
      <height>21</height>
@@ -155,9 +155,9 @@ text-align: center;</string>
   <widget class="QCheckBox" name="PPTCheckBox">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>160</x>
      <y>120</y>
-     <width>71</width>
+     <width>101</width>
      <height>21</height>
     </rect>
    </property>
@@ -167,7 +167,7 @@ font-size: 15px;
 text-align: center;</string>
    </property>
    <property name="text">
-    <string>.ppt/x</string>
+    <string>.ppt/.pptx</string>
    </property>
   </widget>
   <widget class="QCheckBox" name="PdfCheckBox">
@@ -211,7 +211,7 @@ text-align: center;</string>
     <rect>
      <x>50</x>
      <y>180</y>
-     <width>91</width>
+     <width>101</width>
      <height>21</height>
     </rect>
    </property>
@@ -221,7 +221,7 @@ font-size: 15px;
 text-align: center;</string>
    </property>
    <property name="text">
-    <string>.jpg/jpeg</string>
+    <string>.jpg/.jpeg</string>
    </property>
   </widget>
   <widget class="QCheckBox" name="PngCheckBox">
@@ -273,23 +273,43 @@ text-align: center;</string>
     <string notr="true">font-size:13px;border-radius: 10px;</string>
    </property>
   </widget>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QPushButton" name="CancelButton">
+   <property name="geometry">
+    <rect>
+     <x>216</x>
+     <y>290</y>
+     <width>60</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="OkButton">
    <property name="geometry">
     <rect>
      <x>150</x>
      <y>290</y>
-     <width>120</width>
-     <height>30</height>
+     <width>60</width>
+     <height>25</height>
     </rect>
    </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
+   <property name="text">
+    <string>OK</string>
    </property>
-   <property name="styleSheet">
-    <string notr="true"/>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>270</y>
+     <width>171</width>
+     <height>16</height>
+    </rect>
    </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   <property name="text">
+    <string>split by semicolon</string>
    </property>
   </widget>
  </widget>

@@ -41,7 +41,7 @@ class Ui_LoginInfoWidget(object):
         self.tableWidget.setHorizontalHeaderItem(1, item)
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.tableWidget.verticalHeader().setSortIndicatorShown(False)
-        self.tableWidget.verticalHeader().setStretchLastSection(True)
+        self.tableWidget.verticalHeader().setStretchLastSection(False)
         self.label = QtGui.QLabel(LoginInfoWidget)
         self.label.setGeometry(QtCore.QRect(10, 20, 141, 16))
         self.label.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);  \n"
@@ -67,12 +67,12 @@ class Ui_LoginInfoWidget(object):
 "#MinButton:hover{background-image:url(:/images/images/MinButtonPress);}"))
         self.MinButton.setText(_fromUtf8(""))
         self.MinButton.setObjectName(_fromUtf8("MinButton"))
-        self.buttonBox = QtGui.QDialogButtonBox(LoginInfoWidget)
-        self.buttonBox.setGeometry(QtCore.QRect(180, 340, 120, 30))
-        self.buttonBox.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.buttonBox.setStyleSheet(_fromUtf8(""))
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+        self.OkButton = QtGui.QPushButton(LoginInfoWidget)
+        self.OkButton.setGeometry(QtCore.QRect(174, 340, 60, 25))
+        self.OkButton.setObjectName(_fromUtf8("OkButton"))
+        self.CancelButton = QtGui.QPushButton(LoginInfoWidget)
+        self.CancelButton.setGeometry(QtCore.QRect(240, 340, 60, 25))
+        self.CancelButton.setObjectName(_fromUtf8("CancelButton"))
 
         self.retranslateUi(LoginInfoWidget)
         QtCore.QObject.connect(self.MinButton, QtCore.SIGNAL(_fromUtf8("clicked()")), LoginInfoWidget.showMinimized)
@@ -88,5 +88,7 @@ class Ui_LoginInfoWidget(object):
         self.label.setText(_translate("LoginInfoWidget", "Login Infomation:", None))
         self.CloseButton.setToolTip(_translate("LoginInfoWidget", "close", None))
         self.MinButton.setToolTip(_translate("LoginInfoWidget", "minimize", None))
+        self.OkButton.setText(_translate("LoginInfoWidget", "OK", None))
+        self.CancelButton.setText(_translate("LoginInfoWidget", "Cancel", None))
 
 import res_rc

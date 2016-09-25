@@ -40,7 +40,7 @@ border-width:1px;border-color:#2C3E50;}</string>
     <bool>false</bool>
    </attribute>
    <attribute name="verticalHeaderStretchLastSection">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <column>
     <property name="text">
@@ -124,23 +124,30 @@ border-radius:10px;}
     <string/>
    </property>
   </widget>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QPushButton" name="OkButton">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>174</x>
      <y>340</y>
-     <width>120</width>
-     <height>30</height>
+     <width>60</width>
+     <height>25</height>
     </rect>
    </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
+   <property name="text">
+    <string>OK</string>
    </property>
-   <property name="styleSheet">
-    <string notr="true"/>
+  </widget>
+  <widget class="QPushButton" name="CancelButton">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>340</y>
+     <width>60</width>
+     <height>25</height>
+    </rect>
    </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   <property name="text">
+    <string>Cancel</string>
    </property>
   </widget>
  </widget>

@@ -63,19 +63,19 @@ class Ui_FiletypesWidget(object):
 "text-align: center;"))
         self.DocumentsLabel.setObjectName(_fromUtf8("DocumentsLabel"))
         self.DocCheckBox = QtGui.QCheckBox(FiletypesWidget)
-        self.DocCheckBox.setGeometry(QtCore.QRect(50, 90, 71, 21))
+        self.DocCheckBox.setGeometry(QtCore.QRect(50, 90, 101, 21))
         self.DocCheckBox.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);  \n"
 "font-size: 15px;\n"
 "text-align: center;"))
         self.DocCheckBox.setObjectName(_fromUtf8("DocCheckBox"))
         self.XlsCheckBox = QtGui.QCheckBox(FiletypesWidget)
-        self.XlsCheckBox.setGeometry(QtCore.QRect(150, 90, 71, 21))
+        self.XlsCheckBox.setGeometry(QtCore.QRect(160, 90, 71, 21))
         self.XlsCheckBox.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);  \n"
 "font-size: 15px;\n"
 "text-align: center;"))
         self.XlsCheckBox.setObjectName(_fromUtf8("XlsCheckBox"))
         self.PPTCheckBox = QtGui.QCheckBox(FiletypesWidget)
-        self.PPTCheckBox.setGeometry(QtCore.QRect(150, 120, 71, 21))
+        self.PPTCheckBox.setGeometry(QtCore.QRect(160, 120, 101, 21))
         self.PPTCheckBox.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);  \n"
 "font-size: 15px;\n"
 "text-align: center;"))
@@ -93,7 +93,7 @@ class Ui_FiletypesWidget(object):
 "text-align: center;"))
         self.GraphicsLabel.setObjectName(_fromUtf8("GraphicsLabel"))
         self.JpgCheckBox = QtGui.QCheckBox(FiletypesWidget)
-        self.JpgCheckBox.setGeometry(QtCore.QRect(50, 180, 91, 21))
+        self.JpgCheckBox.setGeometry(QtCore.QRect(50, 180, 101, 21))
         self.JpgCheckBox.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);  \n"
 "font-size: 15px;\n"
 "text-align: center;"))
@@ -114,12 +114,15 @@ class Ui_FiletypesWidget(object):
         self.OtherLineEdit.setGeometry(QtCore.QRect(50, 250, 221, 21))
         self.OtherLineEdit.setStyleSheet(_fromUtf8("font-size:13px;border-radius: 10px;"))
         self.OtherLineEdit.setObjectName(_fromUtf8("OtherLineEdit"))
-        self.buttonBox = QtGui.QDialogButtonBox(FiletypesWidget)
-        self.buttonBox.setGeometry(QtCore.QRect(150, 290, 120, 30))
-        self.buttonBox.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.buttonBox.setStyleSheet(_fromUtf8(""))
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+        self.CancelButton = QtGui.QPushButton(FiletypesWidget)
+        self.CancelButton.setGeometry(QtCore.QRect(216, 290, 60, 25))
+        self.CancelButton.setObjectName(_fromUtf8("CancelButton"))
+        self.OkButton = QtGui.QPushButton(FiletypesWidget)
+        self.OkButton.setGeometry(QtCore.QRect(150, 290, 60, 25))
+        self.OkButton.setObjectName(_fromUtf8("OkButton"))
+        self.label = QtGui.QLabel(FiletypesWidget)
+        self.label.setGeometry(QtCore.QRect(60, 270, 171, 16))
+        self.label.setObjectName(_fromUtf8("label"))
 
         self.retranslateUi(FiletypesWidget)
         QtCore.QObject.connect(self.MinButton, QtCore.SIGNAL(_fromUtf8("clicked()")), FiletypesWidget.showMinimized)
@@ -132,13 +135,16 @@ class Ui_FiletypesWidget(object):
         self.MinButton.setToolTip(_translate("FiletypesWidget", "minimize", None))
         self.TitleLabel.setText(_translate("FiletypesWidget", "Choose file types:", None))
         self.DocumentsLabel.setText(_translate("FiletypesWidget", "Documents:", None))
-        self.DocCheckBox.setText(_translate("FiletypesWidget", ".doc/x", None))
+        self.DocCheckBox.setText(_translate("FiletypesWidget", ".doc/.docx", None))
         self.XlsCheckBox.setText(_translate("FiletypesWidget", ".xls", None))
-        self.PPTCheckBox.setText(_translate("FiletypesWidget", ".ppt/x", None))
+        self.PPTCheckBox.setText(_translate("FiletypesWidget", ".ppt/.pptx", None))
         self.PdfCheckBox.setText(_translate("FiletypesWidget", ".pdf", None))
         self.GraphicsLabel.setText(_translate("FiletypesWidget", "Graphics:", None))
-        self.JpgCheckBox.setText(_translate("FiletypesWidget", ".jpg/jpeg", None))
+        self.JpgCheckBox.setText(_translate("FiletypesWidget", ".jpg/.jpeg", None))
         self.PngCheckBox.setText(_translate("FiletypesWidget", ".png", None))
         self.OtherLabel.setText(_translate("FiletypesWidget", "Other:", None))
+        self.CancelButton.setText(_translate("FiletypesWidget", "Cancel", None))
+        self.OkButton.setText(_translate("FiletypesWidget", "OK", None))
+        self.label.setText(_translate("FiletypesWidget", "split by semicolon", None))
 
 import res_rc
