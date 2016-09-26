@@ -15,6 +15,7 @@ except AttributeError:
 class MainWindow(QtGui.QMainWindow):
 
 	addItemSignal = QtCore.pyqtSignal(str)
+	resetSignal = QtCore.pyqtSignal()
 
 	def __init__(self, *args, **kwargs):
 		QtGui.QWidget.__init__(self,parent=None)
@@ -67,6 +68,7 @@ class MainWindow(QtGui.QMainWindow):
 		self.connect(self.ui.ExportButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.exportOutput)
 
 		self.addItemSignal.connect(self.addItemToOutput)
+		self.resetSignal.connect(self.reset)
 
 	def scrollFileWidget(self, position):
 		y = self.oldScrollBarValue - position
@@ -129,7 +131,7 @@ class MainWindow(QtGui.QMainWindow):
 		if not self.isStart:
 			return
 		self.flagQueue.put("STOP")
-		self.rest()
+		self.reset()
 
 	def runFileSearch(self):
 		if not self.hasFiletypes():
@@ -193,7 +195,7 @@ class MainWindow(QtGui.QMainWindow):
 				file.write("\n")
 
 
-	def rest(self):
+	def reset(self):
 		self.isStart = False
 		self.ui.RunButton.raise_()
 		self.ui.SQLWidgetButton.setEnabled(True)

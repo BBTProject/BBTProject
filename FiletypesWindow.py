@@ -35,6 +35,9 @@ class FiletypesWindow(QtGui.QDialog):
 		self.reject()
 
 	def geneFiletypesList(self):
+
+		del self.filetypesList[:]
+		
 		checkBoxs = self.findChildren(QtGui.QCheckBox)
 		for checkBox in checkBoxs:
 			if checkBox.checkState() == Qt.Checked:

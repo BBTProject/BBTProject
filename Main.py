@@ -26,6 +26,7 @@ def mainProgram(paraDict, resultQueue, flagQueue, pauseEvent, mainwindow):
 			print("mainProgram start.......")
 			crawlerProcess = startCrawler(paraDict, resultQueue, flagQueue, pauseEvent)
 			monitorFlag(flagQueue, pauseEvent, crawlerProcess)
+			mainwindow.resetSignal.emit()
 
 
 def monitorFlag(flagQueue, pauseEvent, crawlerProcess):

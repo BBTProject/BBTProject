@@ -9,9 +9,18 @@ class Crawler(object):
 		self.flagQueue = flagQueue
 		self.pauseEvent = pauseEvent
 
+		print()
+		print("In crawler:")
+		print("paraDict: " + str(self.paraDict))
+		print("resultQueue: " + str(self.resultQueue))
+		print("flagQueue: " + str(self.flagQueue))
+		print("pauseEvent: " + str(self.pauseEvent))
+		print()
+
+
 	def start(self):
 		import time
-		for i in range(20):
+		for i in range(10):
 			time.sleep(1)
 			self.resultQueue.put("filename" + str(i))
 		self.flagQueue.put("STOP")
