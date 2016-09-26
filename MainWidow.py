@@ -3,6 +3,7 @@ from PyQt4 import QtCore,QtGui
 from PyQt4.QtCore import Qt
 from FiletypesWindow import FiletypesWindow
 from LoginInfoWindow import LoginInfoWindow
+from ParaKeys import ParaKeys
 import sys
 
 try:
@@ -15,11 +16,13 @@ class MainWindow(QtGui.QMainWindow):
 
 	addItemSignal = QtCore.pyqtSignal(str)
 
-	def __init__(self):
+	def __init__(self, *args, **kwargs):
 		QtGui.QWidget.__init__(self,parent=None)
 
 
-		self.paraDict = dict()
+		self.paraDict = kwargs.pop("paraDict", dict())
+		self.resultQueue = kwargs.pop("resultQueue")
+		self.flagQueue = kwargs.pop("flagQueue")
 
 		self.ui=Ui_BaseWidget()
 		self.ui.setupUi(self)
@@ -35,18 +38,15 @@ class MainWindow(QtGui.QMainWindow):
 		self.ui.SQLInputWidget.hide()
 		self.show()
 
+		self.isStart = False
+
 		self.filetypesList = []
 		self.loginInfos = []
 		self.fileStartUrl = ""
 		self.sqlStartUrl = ""
 		self.keyWords = []
 
-		self.ISFILESEARCH = "ISFILESEARCH"
-		self.FILETYPESLIST = "FILETYPESLIST"
-		self.LOGININFOS = "LOGININFOS"
-		self.FILESTARTURL = "FILESTARTURL"
-		self.SQLSTARTURL = "SQLSTARTURL"
-		self.KEYWORDS = "KEYWORDS"
+
 
 	def connectAllSlot(self):
 
@@ -82,8 +82,9 @@ class MainWindow(QtGui.QMainWindow):
 	def openFiletypesWindow(self):
 		self.filetypesWindow = FiletypesWindow(self.filetypesList)
 		if(self.filetypesWindow.exec() == QtGui.QDialog.Accepted):
-			print(self.filetypesList)
-			self.ui.FiletypesLineEdit.setText(str(self.filetypesList))
+			print("filetypesList: " + str(self.filetypesList))
+			if len(self.filetypesList) != 0:
+				self.ui.FiletypesLineEdit.setText(str(self.filetypesList))
 		else:
 			print("FiletypesWindow rejected")
 
@@ -93,32 +94,42 @@ class MainWindow(QtGui.QMainWindow):
 		self.loginInfoWindow = LoginInfoWindow(filePath, self.loginInfos)
 
 		if(self.loginInfoWindow.exec() == QtGui.QDialog.Accepted):
-			print(self.loginInfos)
-			self.ui.UserInfosLineEdit.setText(str(self.loginInfos))
+			print("loginInfos: " + str(self.loginInfos))
+			if len(self.loginInfos) != 0:
+				self.ui.UserInfosLineEdit.setText(str(self.loginInfos))
 		else:
 			print("LoginInfoWindow rejected")
 
 
 	def prepareForRun(self):
+		if self.isStart:
+			self.flagQueue.put("RESUME")
+			self.ui.PauseButton.raise_()
+			return
 		if self.ui.FileInputWidget.isHidden():
 			self.runSQLDetect()
 		else:
 			self.runFileSearch()
 
 	def run(self):
-		self.ui.SQLWidgetButton.setEnabled(False)
-		self.ui.FileWidgetButton.setEnabled(False)
 		self.ui.PauseButton.raise_()
 		self.ui.OutputTableWidget.setRowCount(0)
 		print(self.paraDict)
-		for i in range(1,100):
-			self.addItemToOutput("dd")
+		
+		self.flagQueue.put("START")
+		self.isStart = True
 
 	def pause(self):
-		pass
+		if not self.isStart:
+			return
+		self.flagQueue.put("PAUSE")
+		self.ui.RunButton.raise_()
 
 	def stop(self):
-		pass
+		if not self.isStart:
+			return
+		self.flagQueue.put("STOP")
+		self.rest()
 
 	def runFileSearch(self):
 		if not self.hasFiletypes():
@@ -129,6 +140,7 @@ class MainWindow(QtGui.QMainWindow):
 			return
 		self.keyWords = self.ui.FilterKeyWordLineEdit.text().split(";")
 		self.setParaDict(isFileSearch=True)
+		self.ui.SQLWidgetButton.setEnabled(False)
 		self.run()
 
 	def runSQLDetect(self):
@@ -136,6 +148,7 @@ class MainWindow(QtGui.QMainWindow):
 			QtGui.QMessageBox.warning(self, "Warning", "Please input some file types!")
 			return
 		self.setParaDict(isFileSearch=False)
+		self.ui.FileWidgetButton.setEnabled(False)
 		self.run()
 
 	def hasFiletypes(self):
@@ -150,12 +163,12 @@ class MainWindow(QtGui.QMainWindow):
 		return self.sqlStartUrl != ""
 
 	def setParaDict(self, isFileSearch):
-		self.paraDict[self.ISFILESEARCH] = isFileSearch
-		self.paraDict[self.FILESTARTURL] = self.fileStartUrl
-		self.paraDict[self.SQLSTARTURL] = self.sqlStartUrl
-		self.paraDict[self.FILETYPESLIST] = self.filetypesList
-		self.paraDict[self.KEYWORDS] = self.keyWords
-		self.paraDict[self.LOGININFOS] = self.loginInfos
+		self.paraDict[ParaKeys.ISFILESEARCH] = isFileSearch
+		self.paraDict[ParaKeys.FILESTARTURL] = self.fileStartUrl
+		self.paraDict[ParaKeys.SQLSTARTURL] = self.sqlStartUrl
+		self.paraDict[ParaKeys.FILETYPESLIST] = self.filetypesList
+		self.paraDict[ParaKeys.KEYWORDS] = self.keyWords
+		self.paraDict[ParaKeys.LOGININFOS] = self.loginInfos
 
 	def addItemToOutput(self, itemText):
 		rowPosition = self.ui.OutputTableWidget.rowCount()
@@ -179,6 +192,13 @@ class MainWindow(QtGui.QMainWindow):
 				file.write(self.ui.OutputTableWidget.itemAt(0, i).text())
 				file.write("\n")
 
+
+	def rest(self):
+		self.isStart = False
+		self.ui.RunButton.raise_()
+		self.ui.SQLWidgetButton.setEnabled(True)
+		self.ui.FileWidgetButton.setEnabled(True)
+		QtGui.QMessageBox.information(self, "Information", "end task......")
 
 	def mousePressEvent(self, event):
 		if event.button()==Qt.LeftButton:
