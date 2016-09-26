@@ -575,6 +575,22 @@ QPushButton:hover{background-image:url(:/images/images/AddFiletypesButtonHover.p
        <string/>
       </property>
      </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>210</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>split by semicolon</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QPushButton" name="PauseButton">
      <property name="geometry">
