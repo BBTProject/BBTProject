@@ -12,6 +12,9 @@ except AttributeError:
         return s
 
 class MainWindow(QtGui.QMainWindow):
+
+	addItemSignal = QtCore.pyqtSignal(str)
+
 	def __init__(self):
 		QtGui.QWidget.__init__(self,parent=None)
 
@@ -55,11 +58,15 @@ class MainWindow(QtGui.QMainWindow):
 
 		self.connect(self.ui.OpenFileButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.openLoginInfoFile)
 
-		self.connect(self.ui.RunButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.run)
+		self.connect(self.ui.RunButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.prepareForRun)
 
 		self.connect(self.ui.PauseButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.pause)
 
 		self.connect(self.ui.StopButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.stop)
+
+		self.connect(self.ui.ExportButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.exportOutput)
+
+		self.addItemSignal.connect(self.addItemToOutput)
 
 	def scrollFileWidget(self, position):
 		y = self.oldScrollBarValue - position
@@ -78,8 +85,7 @@ class MainWindow(QtGui.QMainWindow):
 			print(self.filetypesList)
 			self.ui.FiletypesLineEdit.setText(str(self.filetypesList))
 		else:
-			print(2)
-		print(3)
+			print("FiletypesWindow rejected")
 
 
 	def openLoginInfoWindow(self, filePath):
@@ -90,15 +96,23 @@ class MainWindow(QtGui.QMainWindow):
 			print(self.loginInfos)
 			self.ui.UserInfosLineEdit.setText(str(self.loginInfos))
 		else:
-			print(2)
-		print(3)
+			print("LoginInfoWindow rejected")
 
 
-	def run(self):
-		if self.ui.FileWidget.isHidden():
+	def prepareForRun(self):
+		if self.ui.FileInputWidget.isHidden():
 			self.runSQLDetect()
 		else:
 			self.runFileSearch()
+
+	def run(self):
+		self.ui.SQLWidgetButton.setEnabled(False)
+		self.ui.FileWidgetButton.setEnabled(False)
+		self.ui.PauseButton.raise_()
+		self.ui.OutputTableWidget.setRowCount(0)
+		print(self.paraDict)
+		for i in range(1,100):
+			self.addItemToOutput("dd")
 
 	def pause(self):
 		pass
@@ -108,19 +122,21 @@ class MainWindow(QtGui.QMainWindow):
 
 	def runFileSearch(self):
 		if not self.hasFiletypes():
-			QtGui.QMessageBox.information(self, "Warning", "Please input some file types!")
+			QtGui.QMessageBox.warning(self, "Warning", "Please input some file types!")
 			return
 		elif not self.hasFileStartUrl():
-			QtGui.QMessageBox.information(self, "Warning", "Please input the startUrl!")
+			QtGui.QMessageBox.warning(self, "Warning", "Please input the startUrl!")
 			return
-
-		self.setParaDict(True)
+		self.keyWords = self.ui.FilterKeyWordLineEdit.text().split(";")
+		self.setParaDict(isFileSearch=True)
+		self.run()
 
 	def runSQLDetect(self):
 		if not self.hasSQLStartUrl():
-			QtGui.QMessageBox.information(self, "Warning", "Please input some file types!")
+			QtGui.QMessageBox.warning(self, "Warning", "Please input some file types!")
 			return
-		self.setParaDict(False)
+		self.setParaDict(isFileSearch=False)
+		self.run()
 
 	def hasFiletypes(self):
 		return len(self.filetypesList) != 0
@@ -138,8 +154,31 @@ class MainWindow(QtGui.QMainWindow):
 		self.paraDict[self.FILESTARTURL] = self.fileStartUrl
 		self.paraDict[self.SQLSTARTURL] = self.sqlStartUrl
 		self.paraDict[self.FILETYPESLIST] = self.filetypesList
-		self.paraDict[self.KEYWORDS] = self.ui.FilterKeyWordLineEdit.text()
+		self.paraDict[self.KEYWORDS] = self.keyWords
 		self.paraDict[self.LOGININFOS] = self.loginInfos
+
+	def addItemToOutput(self, itemText):
+		rowPosition = self.ui.OutputTableWidget.rowCount()
+		self.ui.OutputTableWidget.insertRow(rowPosition)
+		self.ui.OutputTableWidget.setItem(rowPosition, 0, QtGui.QTableWidgetItem(itemText))
+
+
+
+
+	def exportOutput(self):
+		rowCount = self.ui.OutputTableWidget.rowCount()
+		if rowCount == 0:
+			QtGui.QMessageBox.information(self, "Information", "Nothing to export!")
+			return
+		outputFilePath = QtGui.QFileDialog.getSaveFileName(self)
+		if not outputFilePath:
+			return
+
+		with open(outputFilePath, "w") as file:
+			for i in range(rowCount):
+				file.write(self.ui.OutputTableWidget.itemAt(0, i).text())
+				file.write("\n")
+
 
 	def mousePressEvent(self, event):
 		if event.button()==Qt.LeftButton:

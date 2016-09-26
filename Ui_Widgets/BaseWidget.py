@@ -234,6 +234,8 @@ class Ui_BaseWidget(object):
         self.FiletypesLineEdit = QtGui.QLineEdit(self.FileInputWidget)
         self.FiletypesLineEdit.setGeometry(QtCore.QRect(165, 63, 251, 25))
         self.FiletypesLineEdit.setStyleSheet(_fromUtf8("font-size:13px;border-radius: 10px;"))
+        self.FiletypesLineEdit.setText(_fromUtf8(""))
+        self.FiletypesLineEdit.setReadOnly(True)
         self.FiletypesLineEdit.setObjectName(_fromUtf8("FiletypesLineEdit"))
         self.UserInfomationsLabel = QtGui.QLabel(self.FileInputWidget)
         self.UserInfomationsLabel.setGeometry(QtCore.QRect(20, 108, 121, 20))
@@ -260,6 +262,7 @@ class Ui_BaseWidget(object):
         self.UserInfosLineEdit = QtGui.QLineEdit(self.FileInputWidget)
         self.UserInfosLineEdit.setGeometry(QtCore.QRect(165, 103, 251, 25))
         self.UserInfosLineEdit.setStyleSheet(_fromUtf8("font-size:13px;border-radius: 10px;"))
+        self.UserInfosLineEdit.setReadOnly(True)
         self.UserInfosLineEdit.setObjectName(_fromUtf8("UserInfosLineEdit"))
         self.OpenFileButton = QtGui.QPushButton(self.FileInputWidget)
         self.OpenFileButton.setGeometry(QtCore.QRect(420, 100, 30, 30))
@@ -361,9 +364,31 @@ class Ui_BaseWidget(object):
 "border-width:0px; \n"
 "} "))
         self.OutputTableWidget.setObjectName(_fromUtf8("OutputTableWidget"))
-        self.OutputTableWidget.setColumnCount(0)
+        self.OutputTableWidget.setColumnCount(1)
         self.OutputTableWidget.setRowCount(0)
+        item = QtGui.QTableWidgetItem()
+        self.OutputTableWidget.setHorizontalHeaderItem(0, item)
         self.OutputTableWidget.horizontalHeader().setStretchLastSection(True)
+        self.ExportButton = QtGui.QPushButton(self.ScrollWidget)
+        self.ExportButton.setGeometry(QtCore.QRect(370, 320, 75, 23))
+        self.ExportButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.ExportButton.setStyleSheet(_fromUtf8("QPushButton{\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(70, 150, 255);\n"
+"    border:none;\n"
+"    border-radius:10px;\n"
+"    padding:2px 4px;\n"
+"    font-family: Verdana;\n"
+"    font-size: 15px;\n"
+"    text-align: center;\n"
+"}\n"
+"QPushButton:hover, QPushButton:pressed , QPushButton:checked\n"
+"{\n"
+"    background-color:#2C3E50;\n"
+"    font-weight:100\n"
+"}\n"
+""))
+        self.ExportButton.setObjectName(_fromUtf8("ExportButton"))
         self.StopButton.raise_()
         self.OutputLabel.raise_()
         self.PauseButton.raise_()
@@ -371,10 +396,10 @@ class Ui_BaseWidget(object):
         self.RunButton.raise_()
         self.SQLInputWidget.raise_()
         self.FileInputWidget.raise_()
+        self.ExportButton.raise_()
 
         self.retranslateUi(BaseWidget)
         QtCore.QObject.connect(self.FileWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileWidget.show)
-        QtCore.QObject.connect(self.SQLWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileWidget.show)
         QtCore.QObject.connect(self.HelpWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileWidget.hide)
         QtCore.QObject.connect(self.AboutWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileWidget.hide)
         QtCore.QObject.connect(self.FileWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileInputWidget.show)
@@ -383,6 +408,7 @@ class Ui_BaseWidget(object):
         QtCore.QObject.connect(self.SQLWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.SQLInputWidget.show)
         QtCore.QObject.connect(self.MinButton, QtCore.SIGNAL(_fromUtf8("clicked()")), BaseWidget.showMinimized)
         QtCore.QObject.connect(self.CloseButton, QtCore.SIGNAL(_fromUtf8("clicked()")), BaseWidget.close)
+        QtCore.QObject.connect(self.SQLWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileWidget.show)
         QtCore.QMetaObject.connectSlotsByName(BaseWidget)
         BaseWidget.setTabOrder(self.FileWidgetButton, self.SQLWidgetButton)
         BaseWidget.setTabOrder(self.SQLWidgetButton, self.HelpWidgetButton)
@@ -417,5 +443,8 @@ class Ui_BaseWidget(object):
         self.FilterKeyWordsLabel.setText(_translate("BaseWidget", "FilterKeyWords", None))
         self.FiletypesLabel.setText(_translate("BaseWidget", "Filetypes", None))
         self.PauseButton.setText(_translate("BaseWidget", "Pause", None))
+        item = self.OutputTableWidget.horizontalHeaderItem(0)
+        item.setText(_translate("BaseWidget", "output", None))
+        self.ExportButton.setText(_translate("BaseWidget", "Export", None))
 
 import res_rc
