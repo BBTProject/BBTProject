@@ -118,6 +118,18 @@ class MainWindow(QtGui.QMainWindow):
 		self.ui.OutputTableWidget.setRowCount(0)
 		print(self.paraDict)
 		
+		try:
+			while True:
+				self.flagQueue.get(False)
+		except Exception as e:
+			print("empty flagQueue")
+
+		try:
+			while True:
+				self.resultQueue.get(False)
+		except Exception as e:
+			print("empty resultQueue")
+
 		self.flagQueue.put("START")
 		self.isStart = True
 
@@ -147,7 +159,7 @@ class MainWindow(QtGui.QMainWindow):
 
 	def runSQLDetect(self):
 		if not self.hasSQLStartUrl():
-			QtGui.QMessageBox.warning(self, "Warning", "Please input some file types!")
+			QtGui.QMessageBox.warning(self, "Warning", "Please input the startUrl!")
 			return
 		self.setParaDict(isFileSearch=False)
 		self.ui.FileWidgetButton.setEnabled(False)
@@ -191,7 +203,7 @@ class MainWindow(QtGui.QMainWindow):
 
 		with open(outputFilePath, "w") as file:
 			for i in range(rowCount):
-				file.write(self.ui.OutputTableWidget.itemAt(0, i).text())
+				file.write(self.ui.OutputTableWidget.item(i, 0).text())
 				file.write("\n")
 
 
