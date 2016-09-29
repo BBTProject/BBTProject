@@ -79,6 +79,8 @@ class search():
 		self.headers['Referer']=url               
 		self.headers['Origin']=url
 		self.url=url
+		self.content=""
+		self.response=None
 
 		req=request.Request(url,headers=self.headers)       
 
