@@ -35,6 +35,8 @@ class Myparser(parser.HTMLParser):
             if content_type and 'html' not in content_type:
                 self.need2feed=False
                 self.classify(content_type,response.geturl())
+        else:
+            self.need2feed=False
 
 
     def set_same_domain(self,flag=True):
