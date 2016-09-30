@@ -1,3 +1,4 @@
+
 #-*- coding:utf-8 -*-
 
 from Ui_Widgets.FiletypesWidget import Ui_FiletypesWidget
