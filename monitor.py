@@ -63,7 +63,7 @@ class monitor(threading.Thread):
             if workernum < lowerbound + middle:
                 
                 if threadSettings.thread_debug:
-                    print ("[*]Adding " + str(x) + " workers")
+                    print ("[*]Adding " + str(temp) + " workers")
                 self.workerpool_.workerstowork(self.workerpool_.createWorker(temp))
             else:
                 pass

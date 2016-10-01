@@ -10,17 +10,12 @@ from PyQt4 import QtCore,QtGui
 from PyQt4.QtCore import Qt
 import sys, time
 
-
-
 def startCrawler(paraDict, resultQueue, flagQueue, pauseEvent):
 	from Crawler import Crawler
 	crawler = Crawler(paraDict, resultQueue, flagQueue, pauseEvent)
 	crawlerProcess = multiprocessing.Process(target = crawler.start, daemon = True)
 	crawlerProcess.start()
 	return crawlerProcess
-
-
-
 
 def mainProgram(paraDict, resultQueue, flagQueue, pauseEvent, mainwindow):
 	while True:
@@ -47,8 +42,7 @@ def monitorFlag(flagQueue, pauseEvent, crawlerProcess):
 		elif flag == "RESUME":
 			pauseEvent.set()
 			print("resume the mainProgram.......")
-
-
+			
 def monitorResult(resultQueue, mainwindow):
 	while True:
 		result = resultQueue.get(True)

@@ -28,6 +28,7 @@ class workerpool:
         
         if  num <= 0:
             print ("[*]Worker number to create must >0")
+            return None
         else:
             workerlist = []
             for i in range(num):
@@ -36,7 +37,7 @@ class workerpool:
             return workerlist
         
     def workerstowork(self,workerlist):
-        if len(workerlist) == 0:
+        if workerlist is None:
             return
         for worker in workerlist:
             
