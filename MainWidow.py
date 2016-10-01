@@ -40,6 +40,7 @@ class MainWindow(QtGui.QMainWindow):
 		self.show()
 
 		self.isStart = False
+		self.numOfOutput = 0
 
 		self.filetypesList = []
 		self.loginInfos = []
@@ -116,6 +117,8 @@ class MainWindow(QtGui.QMainWindow):
 	def run(self):
 		self.ui.PauseButton.raise_()
 		self.ui.OutputTableWidget.setRowCount(0)
+		self.numOfOutput = 0
+		self.ui.OutputNumLabel.setText(str(self.numOfOutput))
 		print(self.paraDict)
 		
 		try:
@@ -188,6 +191,9 @@ class MainWindow(QtGui.QMainWindow):
 		rowPosition = self.ui.OutputTableWidget.rowCount()
 		self.ui.OutputTableWidget.insertRow(rowPosition)
 		self.ui.OutputTableWidget.setItem(rowPosition, 0, QtGui.QTableWidgetItem(itemText))
+
+		self.numOfOutput = self.numOfOutput + 1;
+		self.ui.OutputNumLabel.setText(str(self.numOfOutput))
 
 
 

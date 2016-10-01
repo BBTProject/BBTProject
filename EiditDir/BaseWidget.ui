@@ -339,7 +339,7 @@ QPushButton:pressed, QPushButton:checked
       <rect>
        <x>20</x>
        <y>320</y>
-       <width>51</width>
+       <width>101</width>
        <height>20</height>
       </rect>
      </property>
@@ -349,7 +349,7 @@ font-size: 15px;
 text-align: center;</string>
      </property>
      <property name="text">
-      <string>Output</string>
+      <string>NumOfOutput:</string>
      </property>
     </widget>
     <widget class="QWidget" name="SQLInputWidget" native="true">
@@ -743,6 +743,24 @@ QPushButton:hover, QPushButton:pressed , QPushButton:checked
       <string>Export</string>
      </property>
     </widget>
+    <widget class="QLabel" name="OutputNumLabel">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>320</y>
+       <width>81</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
     <zorder>StopButton</zorder>
     <zorder>OutputLabel</zorder>
     <zorder>PauseButton</zorder>
@@ -751,6 +769,7 @@ QPushButton:hover, QPushButton:pressed , QPushButton:checked
     <zorder>SQLInputWidget</zorder>
     <zorder>FileInputWidget</zorder>
     <zorder>ExportButton</zorder>
+    <zorder>OutputNumLabel</zorder>
    </widget>
   </widget>
  </widget>

@@ -200,7 +200,7 @@ class Ui_BaseWidget(object):
 "}"))
         self.StopButton.setObjectName(_fromUtf8("StopButton"))
         self.OutputLabel = QtGui.QLabel(self.ScrollWidget)
-        self.OutputLabel.setGeometry(QtCore.QRect(20, 320, 51, 20))
+        self.OutputLabel.setGeometry(QtCore.QRect(20, 320, 101, 20))
         self.OutputLabel.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);\n"
 "font-size: 15px;\n"
 "text-align: center;"))
@@ -393,6 +393,12 @@ class Ui_BaseWidget(object):
 "}\n"
 ""))
         self.ExportButton.setObjectName(_fromUtf8("ExportButton"))
+        self.OutputNumLabel = QtGui.QLabel(self.ScrollWidget)
+        self.OutputNumLabel.setGeometry(QtCore.QRect(120, 320, 81, 20))
+        self.OutputNumLabel.setStyleSheet(_fromUtf8("color: rgb(255, 255, 255);\n"
+"font-size: 15px;\n"
+"text-align: center;"))
+        self.OutputNumLabel.setObjectName(_fromUtf8("OutputNumLabel"))
         self.StopButton.raise_()
         self.OutputLabel.raise_()
         self.PauseButton.raise_()
@@ -401,6 +407,7 @@ class Ui_BaseWidget(object):
         self.SQLInputWidget.raise_()
         self.FileInputWidget.raise_()
         self.ExportButton.raise_()
+        self.OutputNumLabel.raise_()
 
         self.retranslateUi(BaseWidget)
         QtCore.QObject.connect(self.FileWidgetButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.FileWidget.show)
@@ -440,7 +447,7 @@ class Ui_BaseWidget(object):
         self.MinButton.setToolTip(_translate("BaseWidget", "minimize", None))
         self.RunButton.setText(_translate("BaseWidget", "Run", None))
         self.StopButton.setText(_translate("BaseWidget", "Stop", None))
-        self.OutputLabel.setText(_translate("BaseWidget", "Output", None))
+        self.OutputLabel.setText(_translate("BaseWidget", "NumOfOutput:", None))
         self.SQLStartUrlLabel.setText(_translate("BaseWidget", "StartUrl", None))
         self.FileStartUrlLabel.setText(_translate("BaseWidget", "StartUrl", None))
         self.UserInfomationsLabel.setText(_translate("BaseWidget", "UserInfomations", None))
@@ -451,5 +458,6 @@ class Ui_BaseWidget(object):
         item = self.OutputTableWidget.horizontalHeaderItem(0)
         item.setText(_translate("BaseWidget", "output", None))
         self.ExportButton.setText(_translate("BaseWidget", "Export", None))
+        self.OutputNumLabel.setText(_translate("BaseWidget", "0", None))
 
 import res_rc
