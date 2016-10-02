@@ -133,21 +133,29 @@ class Myparser(parser.HTMLParser):
     def place_on_file(self,kind,uri):
         if kind in ['jpg','jpeg','jpe','bpm','png','gif']:
             self.imgs.append(uri)
+            return
 
         if kind in ['doc','docx']:
             self.docs.append(uri)
+            return
 
         if kind in ['ppt','pptx']:
             self.ppts.append(uri)
+            return
 
         if kind in ['xls','xlsx']:
             self.xlss.append(uri)
+            return
 
         if kind in ['mp3','wmv']:
             self.mp3s.append(uri)
+            return
 
         if kind in ['mp4','rmvb','rm','avi']:
             self.mp4s.append(uri)
+            return
+
+        self.others.append(uri)
 
 
     def classify(self,content_type,value):
@@ -302,7 +310,8 @@ class Myparser(parser.HTMLParser):
 
 if __name__ == '__main__':
     p=Myparser('http://www.scut.edu.cn')
-    p.classify(None,'http://aaljw/ahowe/atjwo/aeoklshowroatid=wpir')
+    p.classify(None,'http://aaljw/ahowe/atjwo/aeoklshowroatid=wpir.cnx')
     print(p.img_list)
     print(p.link_list)
+    print(p.other_list)
     
