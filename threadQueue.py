@@ -6,6 +6,7 @@ import logs
 class threadQueue:
     
     threadqueue = deque()
+    monitors    = {}
     threadalive = {}
     
     @staticmethod
@@ -79,4 +80,47 @@ class threadQueue:
     def workertotalnum():
         
         return len(threadQueue.threadalive)
+    
+    @staticmethod
+    def check_if_monadded(flag):
+            
+        if flag in threadQueue.monitors :
+            return 1
+        else:
+            return 0
+    
+    @staticmethod
+    def mark_as_monstarted(flag):
+        
+        threadQueue.monitors[flag] = 1
+        
+    @staticmethod
+    def checkIfmonAlive(flag):
+        
+        if threadQueue.monitors[flag] == 1:
+            return 1
+        else:
+            return 0
+        
+    @staticmethod
+    def disablemonitor(flag):
+        
+        threadQueue.monitors[flag] = 0
+        
+    @staticmethod
+    def getalivemonitornum():
+        
+        num = 0
+        flags = list(threadQueue.monitors.keys())
+        for flag in flags:
+            if threadQueue.checkIfmonAlive(flag) == 1:
+                num += 1
+        return num
+
+    @staticmethod
+    def workertotalmonnum():
+        
+        return len(threadQueue.monitors)
+    
+    
     

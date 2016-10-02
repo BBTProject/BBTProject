@@ -126,7 +126,7 @@ class Myparser(parser.HTMLParser):
             return
 
         if content_type == 'application/x-jpg' or content_type ==  'image/jpeg' or content_type ==  'application/x-jpe':
-            print(content_type)
+            #print(content_type)
             self.imgs.append(self.format_uri(value))
             return
 

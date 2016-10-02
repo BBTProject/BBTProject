@@ -3,7 +3,6 @@
 
 from dispatcher import dispatcher
 
-
 class Crawler(object):
 	"""docstring for Crawler"""
 	def __init__(self, paraDict, resultQueue, flagQueue, pauseEvent):

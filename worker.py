@@ -1,7 +1,7 @@
 #-*- coding:utf-8 -*-
 
 import threading
-import logs
+from logs import LOG
 #from filter import filter
 import time
 import random
@@ -28,6 +28,7 @@ class worker(threading.Thread):
         
         while 1:
             if  threadQueue.checkIfAlive(self.flag) != 1 :
+                LOG.WriteLog("[*]Worker " + self.flag + " is dead.")
                 if threadSettings.thread_debug:
                     print ("[*]Worker " + self.flag + " is dead.")
                 #time for worker to have a rest
@@ -36,8 +37,7 @@ class worker(threading.Thread):
             try:
                 #Get url from threadqueue
                 target_url = threadQueue.threadqueue.popleft()
-                if threadSettings.thread_debug :
-                    print("worker" + self.flag + " [*]Get " + str(target_url) + " from queue")
+                LOG.WriteLog("[*]" + self.flag + " working")
             except Exception as e:
                 if threadSettings.thread_debug:
                     print ("[*]" + str(e))
@@ -85,6 +85,7 @@ class worker(threading.Thread):
         searcher.get(target_url)
         parser   = Myparser(target_url)
         parser.check_response(searcher.response)
+        parser.set_same_domain(True)
         if parser.need2feed:
             parser.feed(searcher.text)
             
@@ -107,15 +108,15 @@ class worker(threading.Thread):
         for url in next_links:
             mutex_link.acquire()
             if Requester.check_if_visited(url) == 1:
-                print ("[*]Link " + url + " has been visited.")
+                #print ("[*]Link " + url + " has been visited.")
                 mutex_link.release()
             else:   
                 Requester.mark_as_visited(url)
                 mutex_link.release()
-                print ("[*] Put " + url + " in Link , mark as visited.")
+                #print ("[*] Put " + url + " in Link , mark as visited.")
                 try:
                     threadQueue.add(url)
-                    time.sleep(0.03)
+                    #time.sleep(0.03)
                     if threadSettings.thread_debug:
                         print("worker" + self.flag + "[*]Put " + url + " in working_queue.")
                 except Exception as e:
@@ -128,17 +129,17 @@ class worker(threading.Thread):
         for url in resources_list:
             mutex_res.acquire()
             if  Requester.check_if_resvisited(url) == 1:
-                print ("[*]Res: " + url + " has been visited.")
+                #print ("[*]Res: " + url + " has been visited.")
                 mutex_res.release()
             else:
                 Requester.mark_as_resvisited(url)
                 mutex_res.release()
-                print ("[*] Put " + url + " in res , mark as visited.")
+                #print ("[*] Put " + url + " in res , mark as visited.")
                 try:
                     threadSettings.result_queue.put("filename: " + url)
                     if threadSettings.thread_debug:
                         print("worker" + self.flag + "[*]Put " + url + " in res_queue.")
-                    time.sleep(0.03)
+                    #time.sleep(0.03)
                     
                 except Exception as e:
                     print (e) 

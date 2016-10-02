@@ -1,6 +1,11 @@
 #-*- coding:utf-8 -*-
 
-import logs
+#Patch for the third time:
+#Disable All prints
+#Initiate Logs
+#Eliminate Unnecessary tags
+
+from logs import LOG
 from monitor import monitor
 from workerpool import workerpool
 import time
@@ -26,6 +31,7 @@ class dispatcher:
         threadSettings.flag_queue      = flagQueue
         threadSettings.result_queue    = resultQueue
         threadSettings.pauseEvent      = pauseEvent
+        logger = LOG("","test.log")
         
         #Initiate a worker
         self.workerpool_ = workerpool(paraDict['FILESTARTURL'])
@@ -34,10 +40,7 @@ class dispatcher:
     def create_monitor(self):
         
         self.monitor_ = monitor()
-        self.monitor_.start()
-        monitor.curr_monitors += 1
-        
-    
+        self.monitor_.create_monitor()
         
 if __name__ == '__main__':
     

@@ -6,6 +6,7 @@ import worker
 import random
 import time
 from ThreadSettings import threadSettings
+
 class workerpool:
     
     #Init working thread number
@@ -46,11 +47,12 @@ class workerpool:
                 break
             else:
                 try:
-                    flag = str(random.randint(0,threadSettings.WorkerMaximum))
-                    while threadQueue.check_if_added(flag) == 1:
+                    t = random.randint(0,threadSettings.WorkerMaximum)
+                    flag = str(t)
+                    while threadQueue.check_if_added(flag) == 1 :
                         #Duplicated flag
-                        flag = str(random.randint(0,threadSettings.WorkerMaximum))
-                        
+                        t = (t+1) % threadSettings.WorkerMaximum
+                        flag = str(t)
                     worker.setflag(flag)
                     threadQueue.mark_as_started(flag)
                     time.sleep(threadSettings.WorkerLaunchInterval)
@@ -71,7 +73,7 @@ class workerpool:
         for i in range(num):
             token = random.randint(0,len(flags)-1)
             while threadQueue.checkIfAlive(flags[token])==0:
-                token = random.randint(0,len(flags)-1)
+                token = (token+1)%(len(flags)-1)
             threadQueue.disableworker(flags[token])
             workerpool.currworknum -= 1
             time.sleep(threadSettings.WorkerStopInterval)
