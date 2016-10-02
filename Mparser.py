@@ -1,6 +1,5 @@
-#-*- coding:utf-8 -*-
-
 from html import parser
+
 import re
 
 class Myparser(parser.HTMLParser):
@@ -19,6 +18,17 @@ class Myparser(parser.HTMLParser):
 
         self.need2feed=True
 
+        self.resource_pattern=re.compile('.+?\.(\w+?)$')
+
+        html_type=['html','htm','jsp','xhtml','asp','aspx','php','shtml','nsp','cgi','stm','shtm','perl']
+        domain_postfix=['com','cn','net','org','gov','edu','cc','cx','wang','xin','top','tech','org','red',
+                                'pub','ink','info','hk','xyz','win','tech','int','tv','tw','jp','eu','biz','name',
+                                'pro','museum','coop','aero','us','uk']
+
+        self.html_type=dict([(k,True) for k in html_type])
+        self.domain_postfix=dict([(k,True) for k in domain_postfix])
+
+
         self.url=url
         self.node=url.split('/')
         self.node.pop(1)
@@ -31,7 +41,6 @@ class Myparser(parser.HTMLParser):
         self.ignore_type=["text/css"]
 
     def check_response(self,response):
-        
         if response:
             content_type=response.getheader('Content-Type')
             if content_type and 'html' not in content_type:
@@ -39,6 +48,7 @@ class Myparser(parser.HTMLParser):
                 self.classify(content_type,response.geturl())
         else:
             self.need2feed=False
+
 
     def set_same_domain(self,flag=True):
         self.same_domain=flag
@@ -108,15 +118,55 @@ class Myparser(parser.HTMLParser):
             self.classify(content_type,link)
             # print(attrs)
 
+    def get_link_type(self,link):
+        match=self.resource_pattern.match(link)
+        l_type=None
+        try:
+            l_type=match.group(1)
+        except:
+            pass
+        if l_type and len(l_type) < 5 and l_type not in self.html_type and l_type not in self.domain_postfix:
+            return l_type
+        else:
+            return None
+
+    def place_on_file(self,kind,uri):
+        if kind in ['jpg','jpeg','jpe','bpm','png','gif']:
+            self.imgs.append(uri)
+
+        if kind in ['doc','docx']:
+            self.docs.append(uri)
+
+        if kind in ['ppt','pptx']:
+            self.ppts.append(uri)
+
+        if kind in ['xls','xlsx']:
+            self.xlss.append(uri)
+
+        if kind in ['mp3','wmv']:
+            self.mp3s.append(uri)
+
+        if kind in ['mp4','rmvb','rm','avi']:
+            self.mp4s.append(uri)
+
 
     def classify(self,content_type,value):
         # print(content_type)
         if not value:
             return
 
-        if not content_type or content_type == 'text/html':
+        if not content_type:
+            l_type=self.get_link_type(value)
+            if not l_type:
+                self.links.append(self.format_uri(value))
+            else:
+                self.place_on_file(l_type,self.format_uri(value))
+            return
+
+        if content_type == 'text/html':
             self.links.append(self.format_uri(value))
             return
+
 
         if content_type in self.ignore_type:
             return
@@ -125,41 +175,31 @@ class Myparser(parser.HTMLParser):
             self.pdfs.append(self.format_uri(value))
             return
 
-        if content_type == 'application/x-jpg' or content_type ==  'image/jpeg' or content_type ==  'application/x-jpe':
-            #print(content_type)
+        if content_type in ['application/x-jpg','application/x-jpe','application/x-bmp'] or 'image' in content_type:
+            print(content_type)
             self.imgs.append(self.format_uri(value))
             return
 
 
-        if content_type == 'application/ms-word' or content_type == 'application/x-word':
+        if content_type in ['application/ms-word','application/x-word']:
             self.docs.append(self.format_uri(value))
             return
 
-        if content_type == 'application/x-ppt' or content_type ==  'application/vnd.ms-powerpoint':
+        if content_type in ['application/x-ppt','application/vnd.ms-powerpoint']:
             self.ppts.append(self.format_uri(value))
             return
 
 
-        if content_type == 'application/vnd.ms-excel' or content_type ==  'application/x-xls':
+        if content_type in ['application/vnd.ms-excel','application/x-xls']:
             self.xlss.append(self.format_uri(value))
             return
 
 
-        if content_type == 'audio/mp3':
+        if 'audio' in content_type:
             self.mp3s.append(self.format_uri(value))
             return
 
-        if content_type == 'video/mpeg4':
-            self.mp4s.append(self.format_uri(value))
-            return
-
-
-        if content_type == 'application/vnd.rn-realmedia-vbr':
-            self.mp4s.append(self.format_uri(value))
-            return
-
-
-        if content_type == 'video/avi':
+        if content_type in ['application/vnd.rn-realmedia','application/vnd.rn-realmedia-vbr'] or 'video' in content_type:
             self.mp4s.append(self.format_uri(value))
             return
 
@@ -260,5 +300,9 @@ class Myparser(parser.HTMLParser):
 
     #to be add func like above
 
-
+if __name__ == '__main__':
+    p=Myparser('http://www.scut.edu.cn')
+    p.classify(None,'http://aaljw/ahowe/atjwo/aeoklshowroatid=wpir')
+    print(p.img_list)
+    print(p.link_list)
     
