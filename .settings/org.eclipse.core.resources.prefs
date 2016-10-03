@@ -8,6 +8,7 @@ encoding/Mparser.py=utf-8
 encoding/ParaKeys.py=utf-8
 encoding/Requester.py=utf-8
 encoding/Search.py=utf-8
+encoding/SqliTester.py=utf-8
 encoding/ThreadSettings.py=utf-8
 encoding/dispatcher.py=utf-8
 encoding/logs.py=utf-8

@@ -10,6 +10,8 @@ from Requester import Requester
 from ThreadSettings import threadSettings
 from Mparser import Myparser
 import Search
+from SqliTester import Sqlitester
+
 #py : for adding urls.
 #logger     :  for documenting loggs.
 #filter    :   for parsing things needed.
@@ -27,6 +29,7 @@ class worker(threading.Thread):
     def work(self):
         
         while 1:
+
             if  threadQueue.checkIfAlive(self.flag) != 1 :
                 LOG.WriteLog("[*]Worker " + self.flag + " is dead.")
                 if threadSettings.thread_debug:
@@ -48,18 +51,16 @@ class worker(threading.Thread):
                 else:
                     time.sleep(threadSettings.WaitWhenQueueEmptyInterval)
                     continue
-                #test
             try:
                 self.process_url(target_url)
             except Exception as e:
-                #If queue is empty currently, wait.
+            #If queue is empty currently, wait.
                 if threadSettings.thread_debug:
+                    #print ("[*]Processurl Wrong!!!")
                     print ("[*]" + str(e))
-                try:
-                    self.process_url(target_url)
-                except:
-                    time.sleep(threadSettings.WaitWhenQueueEmptyInterval)
-                    continue
+                
+                time.sleep(threadSettings.WaitWhenQueueEmptyInterval)
+                continue
                 #print ("[*]Queue is empty!")
             '''
             if  'http' in target_url:
@@ -83,20 +84,24 @@ class worker(threading.Thread):
         #acquire content first
         searcher =  Search.search()
         searcher.get(target_url)
-        parser   = Myparser(target_url)
+        parser   = Myparser(searcher.url)
         parser.check_response(searcher.response)
-        parser.set_same_domain(True)
+        #parser.set_same_domain(True)
         if parser.need2feed:
             parser.feed(searcher.text)
-            
+        
         #Example : img and pdf.
         next_links_url = parser.link_list
         resources_url  = parser.img_list + parser.pdf_list
-        #Rearrange resources_url according to 
+        sql_urls       = parser.link_list +\
+        parser.pdf_list + parser.doc_list + parser.other_list
+        #Rearrange resources_url according to
         #Needed resources types.
+        #print ("[*] Run here.")
         self.generatenextlinks(next_links_url)
-        self.deal_resources(resources_url)
-        
+        self.launchsqlitest(sql_urls)
+        #self.deal_resources(resources_url)
+    
     def setflag(self,flag):
         
         self.flag = flag
@@ -140,7 +145,12 @@ class worker(threading.Thread):
                     if threadSettings.thread_debug:
                         print("worker" + self.flag + "[*]Put " + url + " in res_queue.")
                     #time.sleep(0.03)
-                    
                 except Exception as e:
                     print (e) 
+    
+    def launchsqlitest(self, urls):
         
+        for url in urls:
+        
+            t = Sqlitester(url)
+            

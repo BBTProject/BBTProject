@@ -1,11 +1,9 @@
-
 #-*- coding:utf-8 -*-
 
 from MainWidow import MainWindow
 from ParaKeys import ParaKeys
 import multiprocessing
 import threading
-
 from PyQt4 import QtCore,QtGui
 from PyQt4.QtCore import Qt
 import sys, time

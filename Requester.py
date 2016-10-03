@@ -18,14 +18,12 @@ class Requester:
     @staticmethod
     def send(url , params, method):
         
-        print ('[*] Crawling ' + url)
+        #print ('[*] Testing ' + url)
         #Add Log here.
         if  method is "post":
-            response = Requester.session.post(url, data = params, headers = Requester.headers)
-            return response.text
+            return Requester.session.post(url, data = params, headers = Requester.headers,timeout = 4)
         elif method is "get":
-            response =Requester.session.get(url, headers = Requester.headers)
-            return response.text
+            return Requester.session.get(url, headers = Requester.headers, timeout = 4)
         
     @staticmethod
     def check_if_visited(url):

@@ -45,7 +45,11 @@ class monitor(threading.Thread):
         #Maintain queue length approximately 3times smaller than worker number
         #A simple dispatcher example
         #Looking for better equipment ways with multiple experiments.
+        
+        #Dispatch once , plus one.
         self.monit()
+        if queuelen == 0:
+            return
         lowerbound = queuelen*threadSettings.WorkervsQueueLowerBound
         upperbound = queuelen*threadSettings.WorkervsQueueUpperBound
         if  workernum < lowerbound:
@@ -81,9 +85,10 @@ class monitor(threading.Thread):
             threadSettings.flag_queue.put("STOP")
         target_num = int(workerpool.currworknum/threadSettings.WorkerPer_Monitor)
         if target_num > monitor.curr_monitors:
-            temp = target_num - monitor.curr_monitors
-            for i in range(temp):
-                self.create_monitor()
+            if monitor.curr_monitors < threadSettings.MonitorMaximum:
+                temp = target_num - monitor.curr_monitors
+                for i in range(temp):
+                    self.create_monitor()
         elif target_num <= monitor.curr_monitors:
             temp = monitor.curr_monitors - target_num
             self.disablemonitor(temp)

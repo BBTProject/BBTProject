@@ -76,5 +76,5 @@ class workerpool:
                 token = (token+1)%(len(flags)-1)
             threadQueue.disableworker(flags[token])
             workerpool.currworknum -= 1
-            time.sleep(threadSettings.WorkerStopInterval)
+            #time.sleep(threadSettings.WorkerStopInterval)
             
