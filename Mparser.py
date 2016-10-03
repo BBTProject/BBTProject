@@ -26,7 +26,7 @@ class Myparser(parser.HTMLParser):
 
         self.redirect_pattern=re.compile('.+?location.href=[\'"](.+?)[\'"].*')
 
-        html_type=['html','htm','jsp','xhtml','asp','aspx','php','shtml','nsp','cgi','stm','shtm','perl']
+        html_type=['html','htm','jsp','jspy','xhtml','asp','aspx','php','shtml','nsp','cgi','stm','shtm','perl']
         domain_postfix=['com','cn','net','org','gov','edu','cc','cx','wang','xin','top','tech','org','red',
                                 'pub','ink','info','hk','xyz','win','tech','int','tv','tw','jp','eu','biz','name',
                                 'pro','museum','coop','aero','us','uk']
