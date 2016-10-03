@@ -16,9 +16,15 @@ class Myparser(parser.HTMLParser):
         self.mp3s=[]
         self.mp4s=[]
 
+        self.is_script=False
+
+        self.result_for_r_tags={}
+
         self.need2feed=True
 
         self.resource_pattern=re.compile('.+?\.(\w+?)$')
+
+        self.redirect_pattern=re.compile('.+?location.href=[\'"](.+?)[\'"].*')
 
         html_type=['html','htm','jsp','xhtml','asp','aspx','php','shtml','nsp','cgi','stm','shtm','perl']
         domain_postfix=['com','cn','net','org','gov','edu','cc','cx','wang','xin','top','tech','org','red',
@@ -82,10 +88,45 @@ class Myparser(parser.HTMLParser):
             current_uri+=i+'/'
         return current_uri+uri
 
+    def handle_data(self,data):
+        if self.is_script and data:
+            try:
+                match=self.redirect_pattern.findall(data)
+                for redirect_url in match:
+                    self.links.append(self.format_uri(redirect_url))
+            except:
+                pass
+            finally:
+                self.is_script = False
+
+
 
     def handle_starttag(self, tag, attrs):
         #print "Encountered the beginning of a %s tag" % tag
-        # print('init')
+        # print(tag)
+        self.handle_require_tag(tag,attrs)
+
+        if tag == "meta":
+            if len(attrs) == 0:pass
+            else:
+                is_redirect=False
+                content=''
+                for (variable,value) in attrs:
+                    if variable == 'http-equiv' and value == 'refresh':
+                        is_redirect=True
+                    if variable == 'content':
+                        content=value.lower()
+                if is_redirect and content:
+                    pattern=re.compile('.+?url=(.+?)$')
+                    try:
+                        match=pattern.match(content)
+                        redirect_url=self.format_uri(match.group(1))
+                        self.links.append(redirect_url)
+                    except:
+                        pass
+
+
+
         if tag == "img":
             if len(attrs) == 0: pass
             else:
@@ -97,6 +138,7 @@ class Myparser(parser.HTMLParser):
 
 
         if tag == "script":
+            self.is_script=True
             if len(attrs) == 0: pass
             else:
                 for (variable,value) in attrs:
@@ -117,6 +159,20 @@ class Myparser(parser.HTMLParser):
                     link=self.format_uri(value)
             self.classify(content_type,link)
             # print(attrs)
+
+    def set_require_tag_list(self,require_tag_list):
+        self.result_for_r_tags=dict([(k,{}) for k in require_tag_list])
+
+    def handle_require_tag(self,tag,attrs):
+        if tag not in self.result_for_r_tags:
+            return
+        # print(tag)
+        for (variable,value) in attrs:
+            if variable in ['id','name']:
+                self.result_for_r_tags[tag][variable]=value
+            if tag == 'form' and variable == 'action':
+                self.result_for_r_tags[tag][variable]=self.format_uri(value)
+
 
     def get_link_type(self,link):
         match=self.resource_pattern.match(link)
@@ -184,7 +240,7 @@ class Myparser(parser.HTMLParser):
             return
 
         if content_type in ['application/x-jpg','application/x-jpe','application/x-bmp'] or 'image' in content_type:
-            print(content_type)
+            # print(content_type)
             self.imgs.append(self.format_uri(value))
             return
 
@@ -305,12 +361,12 @@ class Myparser(parser.HTMLParser):
             return list(temp)
         except:
             return []
+    
 
     #to be add func like above
 
 if __name__ == '__main__':
     p=Myparser('http://www.scut.edu.cn')
-    p.classify(None,'http://aaljw/ahowe/atjwo/aeoklshowroatid=wpir.cnx')
     print(p.img_list)
     print(p.link_list)
     print(p.other_list)

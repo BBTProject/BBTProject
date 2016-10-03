@@ -13,21 +13,18 @@ def decodeGZip(rawPageData):
     if rawPageData.info().get(u"Content-Encoding") == "gzip":
         try:
             page_content = zlib.decompress(rawPageData.read(), 16 + zlib.MAX_WBITS)
-            print('宸茶В鍘�')
         except zlib.error as ziperror:
-            print('瑙ｅ帇鍑洪敊')
-            print('鍑洪敊瑙ｅ帇椤甸潰:' + rawPageData.geturl())
-            print ('閿欒淇℃伅锛�')
             print (zlib.error)
-            return ''
+            page_content=rawPageData.read()
     else:
-        page_content = rawPageData.read()
+    	page_content = rawPageData.read()
     return page_content
 
 def decode(content,encoding):
 	if isinstance(content,bytes):
 		try:
 			content = str( content,encoding=encoding,errors='replace')
+
 		except:
 			content = str( content,errors='replace')
 	return content
@@ -93,10 +90,12 @@ class search():
 
 			self.url=self.response.geturl()
 
+			print('get url: '+self.url+' successfully')
+
 			
 
 		except Exception as e:
-			print(e)
+			print(e,url)
 		else:
 			pass
 		finally:
@@ -105,19 +104,20 @@ class search():
 	@property
 	def text(self):
 		if self.response:
-			self.content = decodeGZip(self.response)       #瑙ｅ帇鎴杁ecode锛屽緱鍒皊tr褰㈠紡鐨刪tml
+			if not self.content:
+				self.content = decodeGZip(self.response)       
 			content_type=self.response.getheader('Content-Type')
 			pattern=re.compile(r'.+?charset=(.+?)$')
-			# print((content_type))
+			# print(self.content)
 			try:
 				match=pattern.match(content_type)
 				encoding=match.group(1)
-				# print(encoding)
 			except:
 				encoding=apparent_encoding(self.content)
 			
 			return decode(self.content,encoding)
 		else:
+			
 			return ""
 	
 
@@ -125,21 +125,26 @@ class search():
 if __name__ == '__main__':
 	#first of all , the url form must be correct
 	s=search()
-	s.get('http://www.scut.edu.cn')
+	s.get('http://222.16.42.161/eol')
 	p=Myparser(s.url)
 	p.check_response(s.response)
 
 	#set the rule to fliter the url, default is False
-	p.set_same_domain(True)
+	# p.set_same_domain(True)
+	p.set_require_tag_list(['form','input','img'])
 
 	if p.need2feed:
 		p.feed(s.text)
 
-	print(p.link_list)
+	print(p.link_list)	
 	print(p.img_list)
 	print(p.pdf_list)
 	print(p.doc_list)
 	print(p.other_list)
+
+	#the type for p.result_for_r_tags is {tag:{}} , it is not sure that both 'id' and 'name' are in {}
+	#so it is wise to judge if there exists these attrs
+	print(p.result_for_r_tags)
     
-	for i in p.pdf_list:
-		retrieve(i,'pdf2.pdf','')
+	# for i in p.pdf_list:
+	# 	retrieve(i,'pdf2.pdf','')
