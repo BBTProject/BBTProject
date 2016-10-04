@@ -2,6 +2,7 @@
 
 import requests
 import logs
+import urllib.parse
 
 class Requester:
     
@@ -14,6 +15,7 @@ class Requester:
     session = requests.session()
     visited_links = {}
     visited_resources = {}
+    visited_sqlipoints= {}
     
     @staticmethod
     def send(url , params, method):
@@ -21,9 +23,9 @@ class Requester:
         #print ('[*] Testing ' + url)
         #Add Log here.
         if  method is "post":
-            return Requester.session.post(url, data = params, headers = Requester.headers,timeout = 4)
+            return Requester.session.post(url, data = params, headers = Requester.headers)
         elif method is "get":
-            return Requester.session.get(url, headers = Requester.headers, timeout = 4)
+            return Requester.session.get(url, headers = Requester.headers)
         
     @staticmethod
     def check_if_visited(url):
@@ -50,6 +52,25 @@ class Requester:
     def mark_as_resvisited(url):
         
         Requester.visited_resources[url] = 1
+    
+    @staticmethod
+    def mark_if_tested(url):
+        
+        urlpart = urllib.parse.urlparse(url)
+        temp    = urlpart.scheme + urlpart.netloc +\
+        urlpart.path + urlpart.params
+        Requester.visited_sqlipoints[temp] = 1
+    
+    @staticmethod
+    def check_if_tested(url):
+        
+        urlpart = urllib.parse.urlparse(url)
+        temp    = urlpart.scheme + urlpart.netloc +\
+        urlpart.path + urlpart.params
+        if temp in Requester.visited_sqlipoints:
+            return 1
+        else:
+            return 0
         
 if __name__ == '__main__':
     

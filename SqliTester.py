@@ -6,6 +6,7 @@
 #which is hard to be found with manual methods.
 #Only intend to find them out instead of exploit 
 #them or fix them up.
+
 import copy
 from logs import LOG
 from Requester import Requester
@@ -22,7 +23,7 @@ class Sqlitester():
         self.num_type_id = False
         #test strength basic 1.
         self.test_order  = threadSettings.sqlinjection_class
-        self.testphase  =  [" ANd 1=1"," aND 1=2","' AnD '1'='1","' aND '1'='2"]
+        self.testphase  =  [" ANd 1=1"," aND 1=2","'AnD'1'='1","'aND'1'='2"]
         self.param_dic =  self.testurl()
         #threadSettings.result_queue.put("HEllo")
         

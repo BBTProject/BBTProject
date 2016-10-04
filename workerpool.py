@@ -6,6 +6,7 @@ import worker
 import random
 import time
 from ThreadSettings import threadSettings
+from logs import LOG
 
 class workerpool:
     
@@ -29,6 +30,7 @@ class workerpool:
         
         if  num <= 0:
             print ("[*]Worker number to create must >0")
+            LOG.WriteLog("[*]Worker number to create must >0")
             return None
         else:
             workerlist = []
@@ -43,13 +45,16 @@ class workerpool:
         for worker in workerlist:
             
             if workerpool.currworknum >= workerpool.maxnum:
+                LOG.WriteLog("[*]Worker num reaches maximum")
                 print ("[*]Worker num reaches maximum")
                 break
             else:
                 try:
                     t = random.randint(0,threadSettings.WorkerMaximum)
                     flag = str(t)
-                    while threadQueue.check_if_added(flag) == 1 :
+                    #Only when the flag is inside the dict and the flag is running
+                    #Initiating another computing.
+                    while threadQueue.check_if_added(flag) == 1 and threadQueue.checkIfAlive(flag) ==1 :
                         #Duplicated flag
                         t = (t+1) % threadSettings.WorkerMaximum
                         flag = str(t)
@@ -61,6 +66,7 @@ class workerpool:
                 except Exception as e:
                     print (e)
                     print ("[*]Worker starts failed")
+                    LOG.WriteLog("[*]" + str(e))
                     
     def stopworkers(self, num):
         if num == 0:

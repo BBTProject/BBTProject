@@ -1,44 +1,36 @@
 #-*- coding:utf-8 -*-
 
-from collections import deque
-import logs
+from queue import Queue
+from logs  import LOG
+from ThreadSettings import threadSettings
 
 class threadQueue:
     
-    threadqueue = deque()
-    monitors    = {}
+    threadqueue = Queue(maxsize=threadSettings.MaxQueuelength)
     threadalive = {}
     
     @staticmethod
     def add(element):
         
-        threadQueue.threadqueue.append(element)
+        #If queue itself is full
+        #Do not add anymore elements 
+        #and block anyone who wanna put things inside.
+        threadQueue.threadqueue.put(element)
         
     @staticmethod
     def isEmpty():
         
-        if threadQueue.threadqueue:
-            #Not Empty
+        if threadQueue.threadqueue.empty():
+            #Empty
             return 1
         else:
-            #Empty
+            #Not Empty
             return 0
-
-    @staticmethod
-    def clear():
         
-        #Clear Queue
-        threadQueue.threadqueue.clear()
-    
     @staticmethod 
     def length():
         
-        return len(threadQueue.threadqueue)
-    
-    @staticmethod
-    def showContent():
-        
-        print (threadQueue.threadqueue)
+        return threadQueue.threadqueue.qsize()
     
     @staticmethod
     def check_if_added(flag):
@@ -75,52 +67,9 @@ class threadQueue:
             if threadQueue.checkIfAlive(flag) == 1:
                 num += 1
         return num
-            
+    
     @staticmethod
     def workertotalnum():
         
         return len(threadQueue.threadalive)
-    
-    @staticmethod
-    def check_if_monadded(flag):
-            
-        if flag in threadQueue.monitors :
-            return 1
-        else:
-            return 0
-    
-    @staticmethod
-    def mark_as_monstarted(flag):
-        
-        threadQueue.monitors[flag] = 1
-        
-    @staticmethod
-    def checkIfmonAlive(flag):
-        
-        if threadQueue.monitors[flag] == 1:
-            return 1
-        else:
-            return 0
-        
-    @staticmethod
-    def disablemonitor(flag):
-        
-        threadQueue.monitors[flag] = 0
-        
-    @staticmethod
-    def getalivemonitornum():
-        
-        num = 0
-        flags = list(threadQueue.monitors.keys())
-        for flag in flags:
-            if threadQueue.checkIfmonAlive(flag) == 1:
-                num += 1
-        return num
-
-    @staticmethod
-    def workertotalmonnum():
-        
-        return len(threadQueue.monitors)
-    
-    
     

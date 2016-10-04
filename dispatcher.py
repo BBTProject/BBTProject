@@ -23,24 +23,25 @@ class dispatcher:
     def __init__(self,paraDict, resultQueue, flagQueue, pauseEvent):
         
         #Redirect Settings
-        threadSettings.target_filetype = paraDict['FILETYPESLIST']
-        threadSettings.Login_Info      = paraDict['LOGININFOS']
-        threadSettings.ISFILESEARCH    = paraDict['ISFILESEARCH']
-        threadSettings.search_keywords = paraDict['KEYWORDS']
-        threadSettings.sql_start_url   = paraDict['SQLSTARTURL']
-        threadSettings.flag_queue      = flagQueue
-        threadSettings.result_queue    = resultQueue
-        threadSettings.pauseEvent      = pauseEvent
+        threadSettings.filesearch_start_url = paraDict['FILESTARTURL']
+        threadSettings.target_filetype      = paraDict['FILETYPESLIST']
+        threadSettings.Login_Info           = paraDict['LOGININFOS']
+        threadSettings.FileSearch_Mode      = paraDict['ISFILESEARCH']
+        threadSettings.search_keywords      = paraDict['KEYWORDS']
+        threadSettings.sql_start_url        = paraDict['SQLSTARTURL']
+        threadSettings.flag_queue           = flagQueue
+        threadSettings.result_queue         = resultQueue
+        threadSettings.pauseEvent           = pauseEvent
         logger = LOG("","test.log")
-        
-        #Initiate a worker
-        self.workerpool_ = workerpool(paraDict['FILESTARTURL'])
-        self.workerpool_.workerstowork(self.workerpool_.createWorker(threadSettings.Init_WorkerNum))
-        
-    def create_monitor(self):
-        
-        self.monitor_ = monitor()
-        self.monitor_.create_monitor()
+        if  len(threadSettings.sql_start_url) != 0:
+            threadSettings.SqlInjectionTest_Mode = True
+        #Initiate the first worker
+        if  threadSettings.SqlInjectionTest_Mode:
+            self.workerpool_ = workerpool(threadSettings.sql_start_url)
+            self.workerpool_.workerstowork(self.workerpool_.createWorker(threadSettings.Init_WorkerNum))
+        else:
+            self.workerpool_ = workerpool(threadSettings.filesearch_start_url)
+            self.workerpool_.workerstowork(self.workerpool_.createWorker(threadSettings.Init_WorkerNum))
         
 if __name__ == '__main__':
     

@@ -4,9 +4,13 @@ class threadSettings:
 
     #Crucial Settings on thread.
     #Initial Worker num.
+    #Set If wants to search in same domain
+    IS_SAME_DOMAIN              = True
+    SqlInjectionTest_Mode       = False
+    FileSearch_Mode             = False
     Init_WorkerNum              = 1
     #Indicate Each Monitor Inspects how many workers
-    WorkerPer_Monitor           = 3
+    WorkerPer_Monitor           = 5
     #Worker vs Working Queue length lower bound.
     WorkervsQueueLowerBound     = 0.5
     #Worker vs Working Queue length upper bound.
@@ -16,9 +20,11 @@ class threadSettings:
     #Monitor check frequency.
     Monitor_check_time          = 0.01
     #Maximum quantity of workers.
-    WorkerMaximum               = 5000
+    WorkerMaximum               = 400
     #Minimum quantity of workers.
-    MonitorMaximum              = 1000
+    MonitorMaximum              = 80
+    #MaxQueue length
+    MaxQueuelength              = 30000
     #Launch Worker Halting time avoiding of traffic jam.
     WorkerLaunchInterval        = 0.3
     #Stop Worker Halting time avoiding of traffic jam.
@@ -38,8 +44,8 @@ class threadSettings:
     search_keywords             = []
     #sqli test starting url
     sql_start_url               = ""
-    #Open file searching functionality.
-    ISFILESEARCH                = True
+    #file gather starting url
+    filesearch_start_url        = ""
     #Login_Info for trying to login pages.
     Login_Info                  = []
     #results put into the result_queue.
@@ -55,4 +61,5 @@ class threadSettings:
     thread_debug                = True
     #Log switch
     log_open                    = True
+    
     

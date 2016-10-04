@@ -15,30 +15,26 @@ from logs import LOG
 
 class monitor(threading.Thread):
     
-    #Counting the initiate one.
-    curr_monitors = 0
-    
     def run(self):
         
+        if threadSettings.Switch_Halt == True\
+        and threadSettings.Switch_Stop == True:
+            self.putendflag()
+        #Monitoring system interval 2 seconds
+        #time.sleep(threadSettings.Monitor_check_time)
+        self.refresh()
         self.workerpool_ = workerpool()
-        while 1:
-            #Monitoring system interval 2 seconds
-            #time.sleep(threadSettings.Monitor_check_time)
-            if threadQueue.checkIfmonAlive(self.flag) != 1:
-                break
-            self.refresh()
-            self.monit()
-            print ("[*]Running Monitor " + self.flag)
-            LOG.WriteLog("[*]Running Monitor " + self.flag)
-            self.printoutCurr()
-            self.dispatcher(workerpool.currworknum, threadQueue.length())
-            
-    def printoutCurr(self):
+        print ("[*]Running Monitor of worker: " + self.flag)
+        LOG.WriteLog("[*]Running Monitor of worker: " + self.flag)
+        self.LogCurrentParam()
+        self.dispatcher(threadQueue.getaliveworkernum(), threadQueue.length())
         
-        LOG.WriteLog("[*]Current Monitors: " + str(monitor.curr_monitors))
+    def LogCurrentParam(self):
+        
+        #LOG.WriteLog("[*]Current Monitors: " + str(monitor.curr_monitors))
         LOG.WriteLog("[*] Running Workers: " + str(workerpool.currworknum))
         LOG.WriteLog("[*] Elements in queue: " + str(threadQueue.length()))
-        threadQueue.showContent()
+        #threadQueue.showContent()
         
     def dispatcher(self, workernum, queuelen):
         
@@ -47,7 +43,6 @@ class monitor(threading.Thread):
         #Looking for better equipment ways with multiple experiments.
         
         #Dispatch once , plus one.
-        self.monit()
         if queuelen == 0:
             return
         lowerbound = queuelen*threadSettings.WorkervsQueueLowerBound
@@ -78,63 +73,28 @@ class monitor(threading.Thread):
                 self.workerpool_.workerstowork(self.workerpool_.createWorker(temp))
             else:
                 pass
-    
-    def monit(self):
-        
-        if threadSettings.Switch_Halt == True and threadSettings.Switch_Stop==True:
-            threadSettings.flag_queue.put("STOP")
-        target_num = int(workerpool.currworknum/threadSettings.WorkerPer_Monitor)
-        if target_num > monitor.curr_monitors:
-            if monitor.curr_monitors < threadSettings.MonitorMaximum:
-                temp = target_num - monitor.curr_monitors
-                for i in range(temp):
-                    self.create_monitor()
-        elif target_num <= monitor.curr_monitors:
-            temp = monitor.curr_monitors - target_num
-            self.disablemonitor(temp)
-    
-    def create_monitor(self):
-        
-        monitor_ = monitor()
-        t = random.randint(0,threadSettings.MonitorMaximum)
-        flag = str(t)
-        while threadQueue.check_if_monadded(flag) == 1:
-            t = (t+1) % threadSettings.MonitorMaximum
-            flag = str(t)
-        monitor_.setflag(flag)
-        threadQueue.mark_as_monstarted(flag)
-        monitor.curr_monitors += 1
-        monitor_.start()
         
     def refresh(self):
         
         currworknum_ = threadQueue.getaliveworkernum()
         workerpool.currworknum = currworknum_
-        if currworknum_ > 15:
-            if threadSettings.thread_debug:
-                print ("[*]Monitor Running Properly")
-            threadSettings.Switch_Halt = True
-        if threadSettings.Switch_Halt == True and currworknum_<3:
-            threadSettings.Switch_Stop = True
+        if threadSettings.Switch_Halt :
+            if  currworknum_ < 3 :
+                threadSettings.Switch_Stop = True
+        else:
+            if currworknum_ > 15:
+                if threadSettings.thread_debug:
+                    print ("[*]Monitor Running Properly")
+                threadSettings.Switch_Halt = True
+            else:
+                pass
     
     def setflag(self,flag):
         
         self.flag = flag
         
-    def disablemonitor(self,num):
+    def putendflag(self):
         
-        if num <= 0 :
-            return 
-        #If there's 100 , disable 99.
-        if num >= monitor.curr_monitors:
-            num = monitor.curr_monitors - 1
+        threadSettings.flag_queue.put("STOP")
         
-        flags = list(threadQueue.monitors.keys())
-        for i in range(num):
-            token = random.randint(0,len(flags)-1)
-            while threadQueue.checkIfmonAlive(flags[token]) == 0:
-                token = (token+1)%(len(flags)-1)
-            threadQueue.disablemonitor(flags[token])
-            monitor.curr_monitors -= 1
-            
     

@@ -24,6 +24,4 @@ class Crawler(object):
 	def start(self):
 		
 		dispatcher_ = dispatcher(self.paraDict, self.resultQueue, self.flagQueue, self.pauseEvent)
-		time.sleep(15)
-		dispatcher_.create_monitor()
-		
+	

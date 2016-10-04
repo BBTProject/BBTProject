@@ -11,6 +11,8 @@ from ThreadSettings import threadSettings
 from Mparser import Myparser
 import Search
 from SqliTester import Sqlitester
+import monitor
+import urllib.parse
 
 #py : for adding urls.
 #logger     :  for documenting loggs.
@@ -18,6 +20,7 @@ from SqliTester import Sqlitester
 #Requester:    for launching requests.
 mutex_res = threading.Lock()
 mutex_link= threading.Lock()
+mutex_test= threading.Lock()
 
 class worker(threading.Thread):
     
@@ -29,7 +32,15 @@ class worker(threading.Thread):
     def work(self):
         
         while 1:
-
+            #Move counter to counter + 1
+            self.runtime_counter()
+            #Time to run Monitor for this worker.
+            if  self.counter == threadSettings.WorkerPer_Monitor:
+                #reset counter.
+                self.counter = 0
+                monitor_ = monitor.monitor()
+                monitor_.setflag(self.flag)
+                monitor_.start()
             if  threadQueue.checkIfAlive(self.flag) != 1 :
                 LOG.WriteLog("[*]Worker " + self.flag + " is dead.")
                 if threadSettings.thread_debug:
@@ -39,13 +50,13 @@ class worker(threading.Thread):
             #print ("[*]Worker is working.")
             try:
                 #Get url from threadqueue
-                target_url = threadQueue.threadqueue.popleft()
+                target_url = threadQueue.threadqueue.get(False)
                 LOG.WriteLog("[*]" + self.flag + " working")
             except Exception as e:
                 if threadSettings.thread_debug:
                     print ("[*]" + str(e))
                 self.times += 1
-                if self.times == threadSettings.SleepTimeBeforeEnd:
+                if  self.times == threadSettings.SleepTimeBeforeEnd:
                     threadQueue.disableworker(self.flag)
                     break
                 else:
@@ -57,8 +68,8 @@ class worker(threading.Thread):
             #If queue is empty currently, wait.
                 if threadSettings.thread_debug:
                     #print ("[*]Processurl Wrong!!!")
-                    print ("[*]" + str(e))
-                
+                    print ("[*]Worker Error: " + str(e))
+                LOG.WriteLog("[*]Worker Error: " + str(e))
                 time.sleep(threadSettings.WaitWhenQueueEmptyInterval)
                 continue
                 #print ("[*]Queue is empty!")
@@ -86,25 +97,56 @@ class worker(threading.Thread):
         searcher.get(target_url)
         parser   = Myparser(searcher.url)
         parser.check_response(searcher.response)
+        if threadSettings.SqlInjectionTest_Mode:
+            parser.set_same_domain(False)
+        else:
+            parser.set_same_domain(threadSettings.IS_SAME_DOMAIN)
         #parser.set_same_domain(True)
         if parser.need2feed:
             parser.feed(searcher.text)
         
         #Example : img and pdf.
         next_links_url = parser.link_list
-        resources_url  = parser.img_list + parser.pdf_list
-        sql_urls       = parser.link_list +\
-        parser.pdf_list + parser.doc_list + parser.other_list
-        #Rearrange resources_url according to
-        #Needed resources types.
-        #print ("[*] Run here.")
+        test_lst = []
         self.generatenextlinks(next_links_url)
-        self.launchsqlitest(sql_urls)
-        #self.deal_resources(resources_url)
-    
+        if  threadSettings.SqlInjectionTest_Mode:
+        #resources_url  = parser.img_list + parser.pdf_list
+            temp_urls       = parser.link_list +\
+            parser.pdf_list + parser.doc_list + parser.other_list
+            for url in temp_urls:
+                if self.sqlifilter(url) == True:
+                    test_lst.append(url)
+            #Rearrange resources_url according to
+            #Needed resources types.
+            #print ("[*]Sqli Run here.")
+            self.launchsqlitest(test_lst)
+            #self.deal_resources(resources_url)
+        else:
+            resources_lst = []
+            Res           = []
+            #Divide resources more clearly
+            for element in threadSettings.target_filetype:
+                if 'pdf' in element:
+                    resources_lst += parser.pdf_list
+                if 'jpg' in element:
+                    resources_lst += parser.img_list
+                if 'doc' in element:
+                    resources_lst += parser.doc_list
+            if  len(threadSettings.search_keywords[0]) ==0:
+                #print (str(resources_lst))
+                Res = resources_lst
+            else:
+                for res in resources_lst:
+                    for key in threadSettings.search_keywords:
+                        if  key in res:
+                            Res.append(res)
+            #print (str(Res))    
+            self.deal_resources(Res)
+            
     def setflag(self,flag):
         
-        self.flag = flag
+        self.flag    = flag
+        self.counter = 0
     
     def generatenextlinks(self,next_links):
         
@@ -123,9 +165,9 @@ class worker(threading.Thread):
                     threadQueue.add(url)
                     #time.sleep(0.03)
                     if threadSettings.thread_debug:
-                        print("worker" + self.flag + "[*]Put " + url + " in working_queue.")
+                        print("worker" + self.flag + "[*]Put nexturl in queue.")
                 except Exception as e:
-                    print (e) 
+                    print (e)
     
     def deal_resources(self, resources_list):
         
@@ -143,7 +185,7 @@ class worker(threading.Thread):
                 try:
                     threadSettings.result_queue.put("filename: " + url)
                     if threadSettings.thread_debug:
-                        print("worker" + self.flag + "[*]Put " + url + " in res_queue.")
+                        print("worker" + self.flag + "[*]Put url in result.")
                     #time.sleep(0.03)
                 except Exception as e:
                     print (e) 
@@ -151,6 +193,25 @@ class worker(threading.Thread):
     def launchsqlitest(self, urls):
         
         for url in urls:
+            Sqlitester(url)
+    
+    def runtime_counter(self):
         
-            t = Sqlitester(url)
+        self.counter += 1
+    
+    def sqlifilter(self,url):
+        
+        #means no desired params in target_url
+        if len(urllib.parse.urlparse(url).query) == 0:
+            return False
+        else:
+            #if url not tested:
+            mutex_test.acquire()
+            if Requester.check_if_tested(url) == 0:
+                Requester.mark_if_tested(url)
+                mutex_test.release()
+                return True
+            else:
+                mutex_test.release()
+                return False
             

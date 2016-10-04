@@ -90,7 +90,7 @@ class search():
 
 			self.url=self.response.geturl()
 
-			print('get url: '+self.url+' successfully')
+			#print('get url: '+self.url+' successfully')
 
 			
 
