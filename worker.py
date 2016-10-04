@@ -132,6 +132,9 @@ class worker(threading.Thread):
                     resources_lst += parser.img_list
                 if 'doc' in element:
                     resources_lst += parser.doc_list
+                if 'xls' in element or 'ppt' in element or 'png' in element:
+                    resources_lst += parser.other_list
+                    
             if  len(threadSettings.search_keywords[0]) ==0:
                 #print (str(resources_lst))
                 Res = resources_lst
